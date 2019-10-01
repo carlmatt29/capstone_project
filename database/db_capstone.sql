@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2019 at 05:40 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Generation Time: Oct 01, 2019 at 04:48 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -66,7 +68,7 @@ INSERT INTO `education_level` (`id`, `name`, `description`, `is_deleted`) VALUES
 --
 
 CREATE TABLE `employees` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) NOT NULL,
   `code` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `middle_name` varchar(255) DEFAULT '',
@@ -121,8 +123,10 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`id`, `code`, `first_name`, `middle_name`, `last_name`, `nationality`, `birthday`, `gender`, `civil_status`, `sss_no`, `tin`, `philhealth`, `pagibig`, `employment_status_id`, `job_title_id`, `pay_grade_id`, `address1`, `address2`, `city`, `province`, `country`, `postal_code`, `contact_no`, `work_contact_no`, `private_email`, `work_email`, `joined_date`, `department_id`, `supervisor_id`, `is_terminated`, `termination_date`, `basic_salary`, `ecola`, `tax_status_id`, `acu_id`, `bond_date`, `image`, `is_deleted`, `is_regular`, `payroll_group_id`, `regularization_date`, `card_number`, `w_sss`, `w_philhealth`, `w_hdmf`, `branch_id`, `whitelist_ip`) VALUES
 (1, '201500001', 'Aaron Spencer', 'V', 'Villamor', 'Filipino', '1996-11-30', 'Female', 'Single', '12-3456789', '123-456-789-011', '12-345678901-1', '2345-6789-0111', 1, 51, 4, '20 Diego Silang St', '20 Diego Silang St', 'Marikina', 'Cubao', 'Ph', '1801', '09199403122', '09199403122', 'aaron@gmail.com', 'aaron@gmail.com', '2019-06-03', 13, '0', 0, '2017-02-07', 12000, 0, 1, '1234', '2019-01-01', '', 0, 1, 1, '2019-05-04', '11111111111111', 1, 1, 1, 1, 1),
-(95, 'Example01', 'Example', 'Example', 'Example', 'Example', '1999-09-01', 'Male', 'Single', '11-1111111-1', '123-123-123-123', '12-312312321-3', '1231-2312-3123', 1, 0, 0, 'Example', 'Example', 'Example', 'Example', 'Example', '1231', '09123456789', '09123456789', 'sample@gmail.com', 'sample@gmail.com', '0000-00-00', 1, '0', 0, '0000-00-00', 0, 0, 0, '1234', '0000-00-00', '', 0, 0, NULL, '0000-00-00', '1234', 0, 0, 0, NULL, 0),
-(96, 'Sample01', 'Sample', 'Sample', 'Sample', 'Sample', '1999-10-01', 'Male', 'Single', '11-1111111-1', '123-123-123-213', '21-312312312-3', '1231-2312-3123', 0, 0, 0, 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', '1231', '09123456789', '09123456789', 'sample@gmail.com', 'sample@gmail.com', '0000-00-00', 0, '0', 0, '0000-00-00', 0, 0, 0, '1234', '0000-00-00', '', 0, 0, NULL, '0000-00-00', '1234', 0, 0, 0, NULL, 0);
+(2, 'Example01', 'Example', 'Example', 'Example', 'Example', '1999-09-01', 'Male', 'Single', '11-1111111-1', '123-123-123-123', '12-312312321-3', '1231-2312-3123', 1, 0, 0, 'Example', 'Example', 'Example', 'Example', 'Example', '1231', '09123456789', '09123456789', 'sample@gmail.com', 'sample@gmail.com', '0000-00-00', 1, '0', 0, '0000-00-00', 0, 0, 0, '1234', '0000-00-00', '', 0, 0, NULL, '0000-00-00', '1234', 0, 0, 0, NULL, 0),
+(3, 'Sample01', 'Sample', 'Sample', 'Sample', 'Sample', '1999-10-01', 'Male', 'Single', '11-1111111-1', '123-123-123-213', '21-312312312-3', '1231-2312-3123', 0, 0, 0, 'Sample', 'Sample', 'Sample', 'Sample', 'Sample', '1231', '09123456789', '09123456789', 'sample@gmail.com', 'sample@gmail.com', '0000-00-00', 0, '0', 0, '0000-00-00', 0, 0, 0, '1234', '0000-00-00', '', 0, 0, NULL, '0000-00-00', '1234', 0, 0, 0, NULL, 0),
+(6, 'APPLICANT-4', 'haha', 'haha', 'haha', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '0000-00-00', 0, '0', 0, '0000-00-00', 0, 0, 0, '', '0000-00-00', '', 0, 0, NULL, '0000-00-00', NULL, 0, 0, 0, NULL, 0),
+(7, 'APPLICANT-5', 'haha', 'haha', 'haha', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '0000-00-00', 0, '0', 0, '0000-00-00', 0, 0, 0, '', '0000-00-00', '', 0, 0, NULL, '0000-00-00', NULL, 0, 0, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -219,6 +223,7 @@ CREATE TABLE `job_title` (
   `code` varchar(100) NOT NULL,
   `process_id` int(11) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `employee_need` bigint(20) NOT NULL,
   `employee_process_id` varchar(100) NOT NULL,
   `is_available` int(11) NOT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0'
@@ -228,9 +233,9 @@ CREATE TABLE `job_title` (
 -- Dumping data for table `job_title`
 --
 
-INSERT INTO `job_title` (`id`, `code`, `process_id`, `description`, `employee_process_id`, `is_available`, `is_deleted`) VALUES
-(1, 'Haha', 1, 'haha', '103', 1, 0),
-(2, 'Test', 2, 'Test', '1', 1, 0);
+INSERT INTO `job_title` (`id`, `code`, `process_id`, `description`, `employee_need`, `employee_process_id`, `is_available`, `is_deleted`) VALUES
+(1, 'Haha', 1, 'haha', 10, '103', 1, 0),
+(2, 'Test', 2, 'Test', 10, '1', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -400,6 +405,21 @@ INSERT INTO `permissions` (`perm_id`, `user_id`, `user_access_id`, `system_id`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `registered_users`
+--
+
+CREATE TABLE `registered_users` (
+  `id` int(8) NOT NULL,
+  `userName` varchar(255) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `password` varchar(25) NOT NULL,
+  `email` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `skills`
 --
 
@@ -457,7 +477,9 @@ CREATE TABLE `tbl_applicant` (
 --
 
 INSERT INTO `tbl_applicant` (`id`, `applicant_id`, `application_number`, `application_status_id`, `is_viewed`, `is_assessed`, `assessed_by`, `interviewer_id`, `assessment_result`, `working_id`, `working_datetime`, `working`, `pending_interview_status`, `position_applied`, `desired_monthly_salary`, `date_available_for_work`, `date_of_contact`, `interview_date`, `date_applied`, `last_status_update`, `note`) VALUES
-(1, 1, 'APPLICANT-20190903-rnSTX', 1, 1, 0, NULL, 0, NULL, 2, '2019-09-04 03:37:56', 'Example, Example', 0, '1', '20000', '2019-01-01', '0000-00-00', '0000-00-00 00:00:00', '2019-09-03 00:00:00', '0000-00-00', '');
+(1, 1, 'APPLICANT-20190903-rnSTX', 1, 0, 0, NULL, 0, NULL, 0, '0000-00-00 00:00:00', '', 0, '1', '20000', '2019-01-01', '0000-00-00', '0000-00-00 00:00:00', '2019-09-03 00:00:00', '0000-00-00', ''),
+(2, 2, 'APPLICANT-20190930-TmKWX', 1, 0, 0, NULL, 0, NULL, 0, '2019-09-30 12:48:13', '', 0, '2', '16000', '2019-03-09', '0000-00-00', '0000-00-00 00:00:00', '2019-09-30 00:00:00', '0000-00-00', ''),
+(3, 3, 'APPLICANT-20190930-b5rie', 1, 0, 0, NULL, 0, NULL, 0, '2019-09-30 12:50:30', '', 0, '1', '16000', '2019-03-09', '0000-00-00', '0000-00-00 00:00:00', '2019-09-30 00:00:00', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -528,7 +550,9 @@ CREATE TABLE `tbl_applicant_profile` (
 --
 
 INSERT INTO `tbl_applicant_profile` (`id`, `first_name`, `middle_name`, `last_name`, `email`, `present_address`, `contact_number`, `city`, `state_province_region`, `postal_code`, `country`, `gender`, `age`, `date_of_birth`, `place_of_birth`, `citizenship`, `marital_status`, `educational_attainment`, `work_experiences`, `character_references`, `sss`, `pagibig`, `tin`, `philhealth`) VALUES
-(1, 'Test', 'Test', 'Test', 'Test@gmail.com', 'Test', '09123456789', 'Test', 'Test', '1801', 'PH', 'other', 18, '1999-03-16', 'Test', 'Test', 'single', 0, 0, 0, '', '', '', '');
+(1, 'Test', 'Test', 'Test', 'Test@gmail.com', 'Test', '09123456789', 'Test', 'Test', '1801', 'PH', 'other', 18, '1999-03-16', 'Test', 'Test', 'single', 0, 0, 0, '', '', '', ''),
+(2, 'haha', 'haha', 'haha', 'haha@gmail.com', 'haha', '09123456789', 'haha', 'haha', '1801', 'PH', 'male', 20, '1999-12-03', 'haha', 'haha', 'single', 0, 0, 0, '', '', '', ''),
+(3, 'haha', 'haha', 'haha', 'haha@gmail.com', 'haha', '09123123123', 'haha', 'haha', '1801', 'PH', 'male', 20, '1999-03-16', 'haha', 'haha', 'single', 0, 0, 0, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -613,7 +637,7 @@ INSERT INTO `tbl_education_level` (`id`, `is_tertiary`, `education_type`) VALUES
 (3, 0, 'Senior Secondary'),
 (4, 0, 'Tertiary'),
 (5, 1, 'Associate Degree'),
-(6, 1, 'Bachelor''s Degree'),
+(6, 1, 'Bachelor\'s Degree'),
 (7, 1, 'Masteral Degree'),
 (8, 1, 'Doctorate Degree');
 
@@ -750,8 +774,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `employee_id`, `username`, `password`, `password_decrypted`, `user_type_id`, `password_question`, `password_answer`, `is_login`, `is_active`, `is_deleted`, `last_activity`) VALUES
-(1, 1, 'admin', 'fH7MOXC7+Yh5IxWYWILiZw==', 'P@ssw0rd', 4, 'Sino pinaka gwapo?', 'Ako', 0, 1, 0, '2019-09-04 03:39:52'),
-(2, 95, 'example1', '1rXBbo3Bo180n60ou3D1Zg==', 'example', 2, 'example1', 'example1', 0, 1, 0, '2019-09-04 03:39:43');
+(1, 1, 'admin', 'fH7MOXC7+Yh5IxWYWILiZw==', 'P@ssw0rd', 4, 'Sino pinaka gwapo?', 'Ako', 0, 1, 0, '2019-09-30 13:04:14'),
+(2, 95, 'example1', '1rXBbo3Bo180n60ou3D1Zg==', 'example', 2, 'example1', 'example1', 0, 1, 0, '2019-09-04 03:39:43'),
+(3, 6, 'username', '5mAYIRy0LqgOD1E1QEqnPg==', NULL, 3, '', '', 0, 1, 0, '2019-09-30 12:11:38'),
+(4, 4, 'haha', 'bQnJd0phknXoclwGNfHhzQ==', 'haha', 3, '', '', 0, 1, 0, '2019-09-30 12:26:35'),
+(5, 7, 'haha', 'bQnJd0phknXoclwGNfHhzQ==', 'haha', 3, '', '', 0, 1, 0, '2019-09-30 12:50:30');
 
 -- --------------------------------------------------------
 
@@ -796,6 +823,7 @@ CREATE TABLE `user_type` (
 
 INSERT INTO `user_type` (`id`, `description`, `is_deleted`) VALUES
 (2, 'Employee', 0),
+(3, 'Applicant', 0),
 (4, 'Admin', 0);
 
 --
@@ -861,6 +889,12 @@ ALTER TABLE `pay_grade`
 --
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`perm_id`);
+
+--
+-- Indexes for table `registered_users`
+--
+ALTER TABLE `registered_users`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `skills`
@@ -979,131 +1013,164 @@ ALTER TABLE `user_type`
 --
 ALTER TABLE `departments`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `education_level`
 --
 ALTER TABLE `education_level`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `employees_education`
 --
 ALTER TABLE `employees_education`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `employees_emergency_contacts`
 --
 ALTER TABLE `employees_emergency_contacts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `employees_trainings`
 --
 ALTER TABLE `employees_trainings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `employment_status`
 --
 ALTER TABLE `employment_status`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `job_title`
 --
 ALTER TABLE `job_title`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `pay_grade`
 --
 ALTER TABLE `pay_grade`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `registered_users`
+--
+ALTER TABLE `registered_users`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tax_status`
 --
 ALTER TABLE `tax_status`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_applicant`
 --
 ALTER TABLE `tbl_applicant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `tbl_applicant_character_reference`
 --
 ALTER TABLE `tbl_applicant_character_reference`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_applicant_education`
 --
 ALTER TABLE `tbl_applicant_education`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_applicant_profile`
 --
 ALTER TABLE `tbl_applicant_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `tbl_applicant_work_experience`
 --
 ALTER TABLE `tbl_applicant_work_experience`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_application_history`
 --
 ALTER TABLE `tbl_application_history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_application_status`
 --
 ALTER TABLE `tbl_application_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `tbl_education_level`
 --
 ALTER TABLE `tbl_education_level`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `tbl_employee`
 --
 ALTER TABLE `tbl_employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_interview`
 --
 ALTER TABLE `tbl_interview`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `tbl_interview_process`
 --
 ALTER TABLE `tbl_interview_process`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `tbl_position`
 --
 ALTER TABLE `tbl_position`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `trainings`
 --
 ALTER TABLE `trainings`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `user_type`
 --
 ALTER TABLE `user_type`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
