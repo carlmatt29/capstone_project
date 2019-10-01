@@ -489,6 +489,7 @@
         	</section>
         	<div align="center">
 				<input type="submit" name="insert" id="insert" class="btn btn-primary" value="Submit" />
+				<a type="button" href="template.php" name="back" id="back" class="btn btn-primary">Back</a>
 			</div>
     	</form>
 	</section>

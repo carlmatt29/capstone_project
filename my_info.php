@@ -47,11 +47,11 @@
                 <?php Alert(); ?>
                 <div class="box box-warning">
                     <div class="box-body">
-<form class='form-horizontal' action='save_personal_information.php' method="POST" enctype="multipart/form-data">
+<form class='form-horizontal' action='save_my_info.php' method="POST" enctype="multipart/form-data">
 	<input type='hidden' name='id' value='<?php echo !empty($employee)?$employee['id']:''; ?>'>
   <br><br><br><br>
 	<div class="form-group">
-      <label for="code" class="col-md-3 control-label">Employee Code *</label>
+      <label for="code" class="col-md-3 control-label">Applicant Code *</label>
       <div class="col-md-7">
         <input type="text" class="form-control" id="code" placeholder="Employee Code" name='code' value='<?php echo !empty($employee)?htmlspecialchars($employee['code']):''; ?>' required>
       </div>

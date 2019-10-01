@@ -66,5 +66,15 @@
     "Deleted example1 from users.",
     "2019-09-01 23:54:55"
 ]
+,[
+    "Rosales, Carl Matthew Pontaniel",
+    " Created New Employee (Carl Matthew Rosales).",
+    "2019-10-01 00:50:59"
+]
+,[
+    "Rosales, Carl Matthew Pontaniel",
+    " Created New Employee (Carl Matthew Rosales).",
+    "2019-10-01 00:54:44"
+]
 	]
 }
