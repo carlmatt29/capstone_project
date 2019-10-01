@@ -61,7 +61,8 @@
                         <table id='ResultTable' class='table table-bordered table-striped'>
                           <thead>
                             <tr>
-                              <th class='text-center'>Job Title (Assigned Employees Count)</th>
+                              <th class='text-center'>Job Title</th>
+                              <th class='text-center'>Assigned Employees Count</th>
                               <th class='text-center'>Description</th>
                               <th class='text-center'>Hiring</th>
                               <!--<th class="text-center">Interviewer</th>-->
@@ -74,7 +75,8 @@
                               while($row = $data->fetch(PDO::FETCH_ASSOC)):
                             ?>
                               <tr>
-                                <td><?php echo htmlspecialchars($row['code'].' ('.$row['employee_count'].'/'.$row['employee_need'].')')?></td>
+                                <td><?php echo htmlspecialchars($row['code'])?></td>
+                                 <td><?php echo htmlspecialchars($row['employee_count'].'/'.$row['employee_need'])?></td>
                                 <td><?php echo htmlspecialchars($row['description'])?></td>
                                 <td><?php if($row['is_available']==1){
                                     echo "Yes";

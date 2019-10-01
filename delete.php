@@ -34,6 +34,15 @@
 				$audit_details=$con->myQuery("SELECT CONCAT(first_name,' ',last_name) AS full_name FROM {$table} WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
 				$audit_message="Deleted {$audit_details['full_name']} from employees.";
 				break;
+
+			case 'jt':
+				$table="job_title";
+				$page="job_title.php";
+
+				$audit_details=$con->myQuery("SELECT description FROM {$table} WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+				$audit_message="Deleted {$audit_details['description']} from job titles.";
+				break;
+				
 				}
 
 

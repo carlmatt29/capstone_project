@@ -76,5 +76,30 @@
     " Created New Employee (Carl Matthew Rosales).",
     "2019-10-01 00:54:44"
 ]
+,[
+    "Villamor, Aaron Spencer V",
+    "Deleted haha haha from employees.",
+    "2019-10-01 01:42:31"
+]
+,[
+    "Villamor, Aaron Spencer V",
+    "Deleted haha haha from employees.",
+    "2019-10-01 01:42:41"
+]
+,[
+    "Villamor, Aaron Spencer V",
+    "",
+    "2019-10-01 01:42:53"
+]
+,[
+    "Villamor, Aaron Spencer V",
+    "Deleted haha from job titles.",
+    "2019-10-01 01:47:52"
+]
+,[
+    "Villamor, Aaron Spencer V",
+    "Deleted Test from job titles.",
+    "2019-10-01 01:47:59"
+]
 	]
 }

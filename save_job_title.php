@@ -68,7 +68,7 @@
 	unset($inputs['id']);
 				
 				
-				$con->myQuery("INSERT INTO job_title(code,description,employee_process_id,process_id,is_available,employee_need) VALUES(:name,:description,:emp_id,:process_id,:is_available,employee_need)",$inputs);	
+				$con->myQuery("INSERT INTO job_title(code,description,employee_process_id,process_id,is_available,employee_need) VALUES(:name,:description,:emp_id,:process_id,:is_available,:employee_need)",$inputs);
 	
 	$con->commit();
     } catch (Exception $e) {
@@ -87,7 +87,6 @@
 	}
 	$inputs['process_id']= $inputs['id'];
 	$con->myQuery("UPDATE job_title SET code=:name,description=:description,employee_process_id=:emp_id,is_available=:is_available,process_id=:process_id,employee_need=:employee_need WHERE id=:id",$inputs);
-	$con->commit();
     } catch (Exception $e) {
 	$con->rollback();
 	error_logs('Job Title',$e);
