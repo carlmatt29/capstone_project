@@ -17,7 +17,7 @@ $total_time = date("h:i A", strtotime($shift['time_in']));
 <header class="main-header">
 
         <!-- Logo -->
-        <a href="index.php" class="logo">
+        <a href="template.php" class="logo">
             <span class="logo-lg"><b>JMS STAFFING SOLUTIONS</b> INC.</span>
         </a>
 

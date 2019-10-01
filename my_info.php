@@ -7,9 +7,9 @@
      }
      // ini_set("display_error",1);
      // die();
- $employee=$con->myQuery("SELECT * FROM employees e WHERE id=?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+ $employee=$con->myQuery("SELECT * FROM employees e WHERE id=?", array($_SESSION[WEBAPP]['user']['employee_id']))->fetch(PDO::FETCH_ASSOC);
 
-    makeHead("Employee Form");
+    makeHead("My Profile");
 ?>
 
 <?php
@@ -37,7 +37,7 @@
  <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Employees
+            My Profile
         </h1>
     </section>
 
@@ -224,7 +224,7 @@
     </div>
         <div class="form-group">
       <div class="col-sm-10 col-md-offset-2 text-center">
-      	<a href='employees.php' class='btn btn-default'>Back to Employees</a>
+      	<a href='template.php' class='btn btn-default'>Close</a>
         <button type='submit' class='btn btn-warning'>Save </button>
       </div>
     </div>

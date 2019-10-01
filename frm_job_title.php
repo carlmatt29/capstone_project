@@ -11,7 +11,7 @@
 
 	$data="";
 	if(!empty($_GET['id'])){
-  		$data=$con->myQuery("SELECT id,code as name,description,is_available,employee_process_id FROM job_title WHERE id=? LIMIT 1",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+  		$data=$con->myQuery("SELECT id,code as name,description,is_available,employee_need,employee_process_id FROM job_title WHERE id=? LIMIT 1",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
   		if(empty($data)){
   			Modal("Invalid Record Selected");
   			redirect("job_title.php");
@@ -27,7 +27,7 @@
 	$employees=$con->myQuery("SELECT id,CONCAT(last_name,', ',first_name,' ',middle_name,' (',code,')') as employee_name FROM employees WHERE is_deleted=0 AND is_terminated=0 ORDER BY last_name")->fetchAll(PDO::FETCH_ASSOC);
 	$hired=$con->myQuery("SELECT id,CONCAT(last_name,', ',first_name,' ',middle_name) as employee_name,work_contact_no,work_email,address1 FROM employees WHERE is_deleted=0 AND is_terminated=0 AND job_title_id=? ORDER BY last_name",array($_GET['id'])); // ADDED By Marckus : 4/25/2019
 
-	makeHead("Job_title Form");
+	makeHead("Job Title Form");
 ?>
 
 <style>
@@ -94,6 +94,12 @@
                             </select>
                             
                             
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="name" class="col-sm-2 control-label">Total Employee Need *</label>
+                          <div class="col-sm-9">
+                            <input type="number" class="form-control" id="employee_need" placeholder="Enter Total Employee" name='employee_need' value='<?php echo !empty($data)?htmlspecialchars($data['employee_need']):''; ?>' required>
                           </div>
                       </div>
                       

@@ -16,7 +16,7 @@
     //   redirect("index.php");
     // }
         
-  $data=$con->myQuery("SELECT A.id,A.code,A.description,A.is_available,A.employee_process_id,(select concat(first_name,' ',last_name) from employees where id in (A.employee_process_id)) as interviewers, 
+  $data=$con->myQuery("SELECT A.id,A.code,A.description,A.is_available,A.employee_process_id,A.employee_need,(select concat(first_name,' ',last_name) from employees where id in (A.employee_process_id)) as interviewers, 
                         (select COUNT(*) from employees where job_title_id in (A.id) AND is_deleted =0) as employee_count
 	                    FROM job_title A 
 	                    LEFT JOIN employees 
@@ -74,7 +74,7 @@
                               while($row = $data->fetch(PDO::FETCH_ASSOC)):
                             ?>
                               <tr>
-                                <td><?php echo htmlspecialchars($row['code'].' ('.$row['employee_count'].')')?></td>
+                                <td><?php echo htmlspecialchars($row['code'].' ('.$row['employee_count'].'/'.$row['employee_need'].')')?></td>
                                 <td><?php echo htmlspecialchars($row['description'])?></td>
                                 <td><?php if($row['is_available']==1){
                                     echo "Yes";

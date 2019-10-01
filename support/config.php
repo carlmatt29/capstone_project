@@ -283,7 +283,7 @@ function getShift($employee, $date)
 
 
 require_once('class.myPDO.php');
-$con=new myPDO('db_capstone', 'root','mysql');
+$con=new myPDO('db_capstone','root','');
 
 if (isLoggedIn()) {
     if (!user_is_active($_SESSION[WEBAPP]['user']['id'])) {

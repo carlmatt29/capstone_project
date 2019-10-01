@@ -3,7 +3,7 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <?php if (AllowUser(array(2, 4))): ?>
+            <?php if (AllowUser(array(2, 4 , 3))): ?>
             
                  <!--david-->
                 <li>
@@ -33,6 +33,13 @@
                 <li>
                     <a href="employees.php">
                         <i class="fa fa-users"></i> <span>Employees</span>
+                    </a>
+                </li>
+            <?php endif; ?>
+            <?php if (AllowUser(array(2,3,4))): ?>
+                <li>
+                    <a href="my_info.php">
+                        <i class="fa fa-users"></i> <span>My Profile</span>
                     </a>
                 </li>
             <?php endif; ?>

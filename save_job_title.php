@@ -5,9 +5,9 @@
 		die();
 	}
 
-    if(!AllowUser(array(1,4))){
-        redirect("template.php");
-    }
+    // if(!AllowUser(array(1,4))){
+    //     redirect("template.php");
+    // }
 
 
 		if(!empty($_POST)){
@@ -68,7 +68,7 @@
 	unset($inputs['id']);
 				
 				
-				$con->myQuery("INSERT INTO job_title(code,description,employee_process_id,process_id,is_available) VALUES(:name,:description,:emp_id,:process_id,:is_available)",$inputs);	
+				$con->myQuery("INSERT INTO job_title(code,description,employee_process_id,process_id,is_available,employee_need) VALUES(:name,:description,:emp_id,:process_id,:is_available,employee_need)",$inputs);	
 	
 	$con->commit();
     } catch (Exception $e) {
@@ -86,7 +86,7 @@
 	    $inputs['is_available']=0;
 	}
 	$inputs['process_id']= $inputs['id'];
-	$con->myQuery("UPDATE job_title SET code=:name,description=:description,employee_process_id=:emp_id,is_available=:is_available,process_id=:process_id WHERE id=:id",$inputs);
+	$con->myQuery("UPDATE job_title SET code=:name,description=:description,employee_process_id=:emp_id,is_available=:is_available,process_id=:process_id,employee_need=:employee_need WHERE id=:id",$inputs);
 	$con->commit();
     } catch (Exception $e) {
 	$con->rollback();

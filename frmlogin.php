@@ -54,10 +54,7 @@
               </div>
               <div class="col-md topper d-flex align-items-center justify-content-end">
                 <p class="mb-0 d-block">
-                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="modal_registration.php">
-                    <span>Register to Us</span>
-
-                  </button>
+                  <a class="btn btn-info btn-lg" href="applicant_registration.php" data-toggle="registration.php" data-target="#sign-up"><span>Register to Us</span></a>
                 </p>
               </div>
             </div>
