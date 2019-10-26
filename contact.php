@@ -5,21 +5,27 @@
     redirect("template.php");
     die();
   }
+  $registrationSuccess = "";
+
+  if (isset($_SESSION['registration']) && $_SESSION['registration']) {
+    $registrationSuccess = "show";
+    unset($_SESSION['registration']);
+  }
 
 
 
 makeHead("Login");
-  
+
 ?>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-    
+
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -27,51 +33,12 @@ makeHead("Login");
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/ionicons.min.css">
-    
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 
 
-<style type="text/css">
-.modal {
-  
-  left: 0;
-  top: 0;
-  z-index: 9999;
-  padding-top: 100px;
-  background-color: black; 
-  background-color: rgba(0, 0, 0, 0.4);
-  -webkit-transition: 0.5s;
-  overflow: auto;
-  transition: all 0.3s linear;
-
-}
-
- 
-.is-blurred {
-
-  filter: blur(2px);
-
-  -webkit-filter: blur(2px);
-
-}
-
-
-.modal-content {
- background-color: #fefefe;
- margin: auto;
- padding: 20px;
- border-radius: 4px;
- 
-}
-
-
-.ModalOpen { overflow: hidden; }
-.is-hidden { display: none; }
-.is-visuallyHidden { opacity: 0; }
-
-</style>
 
 
 
@@ -100,11 +67,7 @@ makeHead("Login");
                   <span>Call Us: (02)‎ 281-6535</span>
                 </div>
               </div>
-              <div class="col-md topper d-flex align-items-center justify-content-end">
-                <p class="mb-0">
-                  <a class="btn btn-info btn-lg" href="applicant_registration.php" data-toggle="registration.php" data-target="#sign-up"><span>Register to Us</span></a>
-                </p>
-              </div>
+
             </div>
           </div>
         </div>
@@ -126,8 +89,7 @@ makeHead("Login");
 	        	<li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
 	          <li class="nav-item active"><a href="contact.php" class="nav-link">Contact</a></li>
-           
-            <li class="nav-item"><a href="#"class="nav-link" data-toggle="modal" data-target="#sign-up">Sign up</a></li>
+            <li class="nav-item"><a href="applicant_registration.php" class="nav-link">Sign up</a></li>
             <li class="nav-item"><a href="#"class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
 
 	        </ul>
@@ -148,7 +110,7 @@ makeHead("Login");
                   <?php
                     Alert('#sign-in');
                   ?>
-                  <h3><p class="login-box-msg ">Login to your Account</p></h3> 
+                  <h3><p class="login-box-msg ">Login to your Account</p></h3>
                   <!--  <h4 class="form-signin-heading">Login to your Account</h4>-->
               <form action="logingin.php" method="post" autocomplete="off">
                 <input type='hidden' value='<?php echo $ipaddress ?>' id='ipadd' name='ipadd'>
@@ -175,45 +137,11 @@ makeHead("Login");
           </div>
         </div>
       </div>
-    </section> 
-
-    <!-- Modal Registration -->
-
-    <section id="modal_log-in">
-      <div class="modal is-hidden is-visuallyHidden fade" id="sign-up">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-body">
-              
-              <div class="container">
-                  <div class="row">
-                    <div class="col-md-6 col-md-offset-3" align="center">
-                        <?php if($msg != "") echo $msg . "<br><br>"; ?>
-                        <form method="post" action="registration.php">
-                          
-                          
-
-                            <input class="form-control"  style="" type="text" name="firstname" placeholder="Firstname..."><br>
-                            <input class="form-control" type="text" name="middlename" placeholder="Middlename..."><br>
-                            <input class="form-control" type="text" name="lastname" placeholder="Lastname..."><br>
-                            <input class="form-control" type="email" name="email" placeholder="Email..."><br>
-                            <input class="form-control" type="text" name="username" placeholder="Username..."><br>
-                            <input class="form-control" type="password" name="password" placeholder="Password..."><br>
-                            <input class="form-control" type="password" name="cPassword" placeholder="Confirm Password..."><br>
-                           <input class="btn btn-primary" type="submit" name="submit" value="Register"><br>
-                        </form>
-                    </div>
-                  </div>
-        
-              </div>
-       
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
-   <!-- End Modal Registration -->
-    
+
+
+
+
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
       <div class="overlay"></div>
       <div class="container">
@@ -224,6 +152,8 @@ makeHead("Login");
         </div>
       </div>
     </section>
+
+
 
     <section class="ftco-section contact-section">
       <div class="container">
@@ -272,13 +202,13 @@ makeHead("Login");
                 <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
               </div>
             </form>
-          
+
           </div>
         </div>
       </div>
     </section>
 
-    <section class="ftco-section ftco-no-pb ftco-no-pt">
+   <!--  <section class="ftco-section ftco-no-pb ftco-no-pt">
     	<div class="container-fluid px-0">
     		<div class="row justify-content-center">
         	<div class="col-md-12">
@@ -286,8 +216,8 @@ makeHead("Login");
         	</div>
         </div>
     	</div>
-    </section>
-		
+    </section> -->
+
      <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
@@ -304,7 +234,7 @@ makeHead("Login");
               </div>
             </div>
           </div>
-         
+
 
 
           <div class="col-md-6 col-lg-3">
@@ -349,12 +279,28 @@ makeHead("Login");
         </div>
       </div>
     </footer>
-    
-  
+  <div class="modal" id="registration-modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+        <center><h3>You have been Registered! Please Verify your email!</h3></center>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
- 
+
 
 
   <script src="js/jquery.min.js"></script>
@@ -372,8 +318,11 @@ makeHead("Login");
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
 
+  <script>
+      console.log("fired!");
+      $('#registration-modal').modal("<?php echo $registrationSuccess ?>");
+  </script>
 
 <?php
   Modal();

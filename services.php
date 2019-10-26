@@ -6,10 +6,16 @@
     die();
   }
 
+  $registrationSuccess = "";
+
+  if (isset($_SESSION['registration']) && $_SESSION['registration']) {
+    $registrationSuccess = "show";
+    unset($_SESSION['registration']);
+  }
 
 
 makeHead("Login");
-  
+
 ?>
 
 
@@ -17,12 +23,12 @@ makeHead("Login");
     <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-    
+
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -30,11 +36,11 @@ makeHead("Login");
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/ionicons.min.css">
-    
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
-  
+
 
 
 
@@ -57,7 +63,7 @@ makeHead("Login");
 					    <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
 					    	<div class="icon d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
 						    <div class="text">
-				
+
 						    	<span>Call Us:(02)‎ 281-6535</span>
 						    </div>
 					    </div>
@@ -103,7 +109,7 @@ makeHead("Login");
                   <?php
                     Alert('#sign-in');
                   ?>
-                  <h3><p class="login-box-msg ">Login to your Account</p></h3> 
+                  <h3><p class="login-box-msg ">Login to your Account</p></h3>
                   <!--  <h4 class="form-signin-heading">Login to your Account</h4>-->
               <form action="logingin.php" method="post" autocomplete="off">
                 <input type='hidden' value='<?php echo $ipaddress ?>' id='ipadd' name='ipadd'>
@@ -138,9 +144,9 @@ makeHead("Login");
           <div class="modal-content">
             <div class="modal-body">
               <pre style="white-space: pre-wrap;">To define warehouse logistics, then we must first understand the significance of logistics itself. At the simplest possible terms, logistics may be described as the thorough planning, business, management, and execution of complex operations. In most industries, including warehousing, logistics also extends to the flow of physical products and information.
-            
+
               Warehouse logistics, therefore, encompasses each of the varied, complex factors -- business, movements, and management -- involved in warehousing. Including the flow (shipping and receiving) of physical inventory, as well as that of more subjective goods, including information and time.
-              
+
               Warehouse logistics can also expand to whatever from warehouse pest control, to damaged goods handling, to security policies, to human resources management, to customer returns. In other words, warehouse logistics entails all of the policies, processes, and organizational resources essential to keep your warehouse operations running smoothly.
               </pre>
             </div>
@@ -198,7 +204,7 @@ makeHead("Login");
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
             <h1 class="mb-2 bread">Services</h1>
-            
+
           </div>
         </div>
       </div>
@@ -211,7 +217,7 @@ makeHead("Login");
 						<div class="services-2 noborder-left text-center ftco-animate">
 							<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-analysis"></span></div>
 							<div class="text media-body">
-                <a href="#"class="nav-link" data-toggle="modal" data-target="#warehouse-logistic"><h3>Warehouse and Logistic</h3></a>			
+                <a href="#"class="nav-link" data-toggle="modal" data-target="#warehouse-logistic"><h3>Warehouse and Logistic</h3></a>
 								<ul>
 									<li>Driver</li>
 									<li>Forklift Operator</li>
@@ -255,7 +261,7 @@ makeHead("Login");
 						<div class="services-2 text-center ftco-animate">
 							<div class="icon mt-2 d-flex justify-content-center align-items-center"><span class="flaticon-insurance"></span></div>
 							<div class="text media-body">
-                <a href="#"class="nav-link" data-toggle="modal" data-target="#retail-food"><h3>Retail & Food Services</h3></a>		
+                <a href="#"class="nav-link" data-toggle="modal" data-target="#retail-food"><h3>Retail & Food Services</h3></a>
 								<li>Merchandisers</li>
 								<li>Promodizers</li>
 								<li>Food Handlers</li>
@@ -269,7 +275,7 @@ makeHead("Login");
 				</div>
 			</div>
 		</section>
-		
+
   <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
         <div class="row mb-5">
@@ -286,7 +292,7 @@ makeHead("Login");
 	            </div>
             </div>
           </div>
-         
+
 
 
           <div class="col-md-6 col-lg-3">
@@ -331,8 +337,25 @@ makeHead("Login");
         </div>
       </div>
     </footer>
-    
-  
+
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+      <center><h3>You have been Registered! Please Verify your email!</h3></center>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
@@ -353,8 +376,11 @@ makeHead("Login");
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
- 
+
+  <script>
+    console.log("fired!");
+    $('#registration-modal').modal("<?php echo $registrationSuccess ?>");
+  </script>
 
  <?php
   Modal();

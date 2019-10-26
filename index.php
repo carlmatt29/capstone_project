@@ -104,14 +104,16 @@ makeHead("Login");
 <!-- Start Login -->
 <section id="modal_log-in">
   <div class="modal fade" id="sign-in">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog">
       <div class="modal-content">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="modal-body">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+        <div class="modal-body modal-body-center">
           <div class="login-logo">
             <img src="dist/img/capstone/JMSSolution.png" class='img-responsive center-block'>
           </div><!-- login-logo -->
-          <?php if ($msg != "") echo $msg . "<br><br>"; ?>
+
           <h3>
             <p class="login-box-msg ">Login to your Account</p>
           </h3>
@@ -312,21 +314,6 @@ makeHead("Login");
 </footer>
 
 
-<!--    <div class="modal show fade in" role="dialog" id="myModal">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <div class="modal-body">
-              <div class="container" style="margin-top: 100px;">
-                <div class="row">
-
-                  <h1>You are Registered! Please Verify your Email</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
 <div class="modal" id="registration-modal" role="dialog">
   <div class="modal-dialog">
@@ -334,10 +321,9 @@ makeHead("Login");
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+      <center><h3>You have been Registered! Please Verify your email!</h3></center>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
