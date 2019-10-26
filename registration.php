@@ -1,5 +1,16 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once("support/config.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require '.\PHPMailer\Exception.php';
+require '.\PHPMailer\PHPMailer.php';
+require '.\PHPMailer\SMTP.php';
+require '.\PHPMailer\OAuth.php';
 
 if (!empty($_POST)) {
 
@@ -47,25 +58,34 @@ if (!empty($_POST)) {
 
 		$con->myQuery("INSERT INTO users(employee_id,username,password,password_decrypted,user_type_id,token) VALUES(:emp_id,:username,:password,:password_decrypted,:user_type_id,:token)", $param_user);
 
+		$mail = new PHPMailer();
+		$mail->SMTPDebug = 1;
+		$mail->isSMTP();
+		$mail->Host = 'smtp.gmail.com';
+		$mail->SMTPAuth = true;
+		$mail->Username = "carlrosales32998@gmail.com";
+		$mail->Password = "Matthew29";
+		$mail->SMTPSecure = "tls";
+		$mail->Port = 587;
 
-		$to      = $inputs['email'];
-		$subject = 'Email Verification';
-		$message = "Please Click on the link below <br><br> <a href='localhost/capstone_project/confirm.php?email=$to&token=$token'>Click Here</a>";
+		$mail->setFrom('carlrosales32998@gmail.com');
+		$mail->addAddress($inputs['email']);
+		$mail->addReplyTo('carlrosales32998@gmail.com');
 
-		$headers = 'From: carlrosales32998@gmail.com' . "\r\n" .
-			'Reply-To: carlrosales32998@gmail.com' . "\r\n" .
-			'X-Mailer: PHP/' . phpversion();
-		$headers .= "Return-Path: carlrosales32998@gmail.com\r\n";
-		// $headers .= "CC: sombodyelse@example.com\r\n";
-		// $headers .= "BCC: " . $_POST['emailAddress'] . "\r\n";
+		$mail->isHTML(true);                                  // Set email format to HTML
+		$mail->Subject = 'Email Verification';
+		$mail->Body = "Please Click on the link below <br><br> <a href='localhost/capstone_project/confirm.php?email=$to&token=$token'>Click Here</a>";
 
-		$result = mail($to, $subject, $message);
+		$result = $mail->send();
 
-		echo "result: " . $result;
-
+		if (PEAR::isError($result)) {
+			echo ('<p>' . $result->getMessage() . '</p>');
+		} else {
+			echo ('<p>Message successfully sent!</p>');
+		}
 
 		Alert("Save succesful", "success");
-		// redirect("index.php");
+		redirect("index.php");
 
 		$con->commit();
 	} catch (Exception $e) {
