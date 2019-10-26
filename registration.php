@@ -1,7 +1,9 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 require_once("support/config.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -12,14 +14,17 @@ require '.\PHPMailer\PHPMailer.php';
 require '.\PHPMailer\SMTP.php';
 require '.\PHPMailer\OAuth.php';
 
+
+
+
 if (!empty($_POST)) {
 
 	$inputs = $_POST;
 
 	try {
-		echo "<pre>";
-		print_r($inputs);
-		echo "</pre>";
+		// echo "<pre>";
+		// print_r($inputs);
+		// echo "</pre>";
 
 		$con->beginTransaction();
 		$special_id = $con->myQuery("SELECT COUNT(id)+1 as special_id FROM employees")->fetch();
@@ -46,16 +51,16 @@ if (!empty($_POST)) {
 		//password_hash($inputs['password'], PASSWORD_DEFAULT);
 
 		$token = uniqid();
-		$param_user = array(
-			'emp_id' => $inputs['applicant_id'],
-			'username' => $inputs['username'],
-			'password' => $inputs['password'],
-			'password_decrypted' => $inputs['cPassword'],
-			'user_type_id' => 3,
-			'token' => $token
-		);
+		// $param_user = array(
+		// 	'emp_id' => $inputs['applicant_id'],
+		// 	'username' => $inputs['username'],
+		// 	'password' => $inputs['password'],
+		// 	'password_decrypted' => $inputs['cPassword'],
+		// 	'user_type_id' => 3,
+		// 	'token' => $token
+		// );
 
-
+		// EMAIL VERIFICATION
 		$con->myQuery("INSERT INTO users(employee_id,username,password,password_decrypted,user_type_id,token) VALUES(:emp_id,:username,:password,:password_decrypted,:user_type_id,:token)", $param_user);
 
 		$mail = new PHPMailer();
@@ -68,7 +73,7 @@ if (!empty($_POST)) {
 		$mail->SMTPSecure = "tls";
 		$mail->Port = 587;
 
-		$mail->setFrom('carlrosales32998@gmail.com');
+		$mail->setFrom('carlrosales32998@gmail.com','JMSStaffingSolutionInc.');
 		$mail->addAddress($inputs['email']);
 		$mail->addReplyTo('carlrosales32998@gmail.com');
 
@@ -78,13 +83,16 @@ if (!empty($_POST)) {
 
 		$result = $mail->send();
 
-		if (PEAR::isError($result)) {
-			echo ('<p>' . $result->getMessage() . '</p>');
+		if($result) {
+			$_SESSION["registration"] = true;
+			
 		} else {
-			echo ('<p>Message successfully sent!</p>');
+			$_SESSION["registration"] = false;
+	
 		}
 
 		Alert("Save succesful", "success");
+
 		redirect("index.php");
 
 		$con->commit();
