@@ -41,7 +41,7 @@
 
 	$applicant_id = $con->lastInsertId();
 
-	$qry = $con->myQuery("INSERT INTO tbl_applicant (applicant_id, application_number, application_status_id, position_applied, desired_monthly_salary, date_available_for_work, date_applied) VALUES (?, ?, ?, ?, ?, ?, ?)", array($applicant_id, $application_number, 1, $position_applied, $desired_monthly_salary, $date_available_for_work, $date_today));
+	$qry = $con->myQuery("INSERT INTO tbl_applicant (applicant_id, application_number, application_status_id, position_applied, desired_monthly_salary, date_available_for_work, date_applied) VALUES (?, ?, ?, ?, ?, ?, ?)", array($applicant_id, $application_number, 1, $position_applied, 0, $date_available_for_work, $date_today));
 
 	//for($count = 0; $count<count($_POST['hidden_school_name']); $count++) {
 		/*$data = array(

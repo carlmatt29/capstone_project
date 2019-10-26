@@ -31,7 +31,54 @@ makeHead("Login");
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+
+
+<style type="text/css">
+.modal {
+  
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  padding-top: 100px;
+  background-color: black; 
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-transition: 0.5s;
+  overflow: auto;
+  transition: all 0.3s linear;
+
+}
+
  
+.is-blurred {
+
+  filter: blur(2px);
+
+  -webkit-filter: blur(2px);
+
+}
+
+
+.modal-content {
+ background-color: #fefefe;
+ margin: auto;
+ padding: 20px;
+ border-radius: 4px;
+ 
+}
+
+
+.ModalOpen { overflow: hidden; }
+.is-hidden { display: none; }
+.is-visuallyHidden { opacity: 0; }
+
+</style>
+
+
+
+
+
+
+
 	  <div class="bg-top navbar-light">
       <div class="container">
         <div class="row no-gutters d-flex align-items-center align-items-stretch">
@@ -79,6 +126,8 @@ makeHead("Login");
 	        	<li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
 	          <li class="nav-item active"><a href="contact.php" class="nav-link">Contact</a></li>
+           
+            <li class="nav-item"><a href="#"class="nav-link" data-toggle="modal" data-target="#sign-up">Sign up</a></li>
             <li class="nav-item"><a href="#"class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
 
 	        </ul>
@@ -89,7 +138,7 @@ makeHead("Login");
 
 
     <section id="modal_log-in">
-      <div class="modal fade" id="sign-in">
+      <div class="modal is-hidden is-visuallyHidden fade" id="sign-in">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body">
@@ -101,7 +150,7 @@ makeHead("Login");
                   ?>
                   <h3><p class="login-box-msg ">Login to your Account</p></h3> 
                   <!--  <h4 class="form-signin-heading">Login to your Account</h4>-->
-              <form action="logingin.php" method="post">
+              <form action="logingin.php" method="post" autocomplete="off">
                 <input type='hidden' value='<?php echo $ipaddress ?>' id='ipadd' name='ipadd'>
                 <input type='hidden' value='<?php echo $ip_address['ip_address'] ?>' id='myipadd' name='myipadd'>
                 <div class="form-group has-feedback">
@@ -126,9 +175,44 @@ makeHead("Login");
           </div>
         </div>
       </div>
+    </section> 
+
+    <!-- Modal Registration -->
+
+    <section id="modal_log-in">
+      <div class="modal is-hidden is-visuallyHidden fade" id="sign-up">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              
+              <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-3" align="center">
+                        <?php if($msg != "") echo $msg . "<br><br>"; ?>
+                        <form method="post" action="registration.php">
+                          
+                          
+
+                            <input class="form-control"  style="" type="text" name="firstname" placeholder="Firstname..."><br>
+                            <input class="form-control" type="text" name="middlename" placeholder="Middlename..."><br>
+                            <input class="form-control" type="text" name="lastname" placeholder="Lastname..."><br>
+                            <input class="form-control" type="email" name="email" placeholder="Email..."><br>
+                            <input class="form-control" type="text" name="username" placeholder="Username..."><br>
+                            <input class="form-control" type="password" name="password" placeholder="Password..."><br>
+                            <input class="form-control" type="password" name="cPassword" placeholder="Confirm Password..."><br>
+                           <input class="btn btn-primary" type="submit" name="submit" value="Register"><br>
+                        </form>
+                    </div>
+                  </div>
+        
+              </div>
+       
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-
-
+   <!-- End Modal Registration -->
     
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
       <div class="overlay"></div>
@@ -270,6 +354,7 @@ makeHead("Login");
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+ 
 
 
   <script src="js/jquery.min.js"></script>
@@ -294,3 +379,12 @@ makeHead("Login");
   Modal();
   makeFoot();
 ?>
+
+
+
+
+
+
+
+
+

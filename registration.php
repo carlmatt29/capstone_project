@@ -41,7 +41,7 @@ require_once("support/config.php");
 					$con->myQuery("INSERT INTO users(employee_id,username,password,password_decrypted,user_type_id) VALUES(:emp_id,:username,:password,:password_decrypted,:user_type_id)",$param_user);
 
 					Alert("Save succesful","success");
-					redirect("users.php");
+					redirect("index.php");
 	            	
 	            	$con->commit();
                 } catch (Exception $e) {

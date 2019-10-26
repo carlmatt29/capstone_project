@@ -1,3 +1,17 @@
+ <?php
+  require_once("support/config.php");
+
+  if(isLoggedIn()){
+    redirect("template.php");
+    die();
+  }
+
+
+
+makeHead("Login");
+  
+?>
+
    <?php
     require_once("./support/config.php");
     require '.\PHPMailer\Exception.php';
@@ -35,42 +49,61 @@
                    
 
                     $con->myQuery("INSERT INTO users (firstname,middlename,lastname,email,password,isEmailConfirmed,token)
-                        VALUES('$firstname','middlename','lastname', '$email', '$password', '0','$token');
+                        VALUES('$firstname','$middlename','$lastname', '$email', '$password', '0','$token');
                         ");
 
                     
-                    include_once "PHPMailer\PHPMailer.php";
+                    //include_once "PHPMailer\PHPMailer.php";
 
-                    $mail = new PHPMailer();
+                    //$mail = new PHPMailer();
                     //Enable SMTP debugging. 
-                    $mail->SMTPDebug = 1;                               
+                    //$mail->SMTPDebug = 1;                               
                     //Set PHPMailer to use SMTP.
-                    $mail->isSMTP();            
+                    //$mail->isSMTP();            
                     //Set SMTP host name                          
-                    $mail->Host = 'localhost';
+                    // $mail->Host = 'localhost';
                     //Set this to true if SMTP host requires authentication to send email
-                    $mail->SMTPAuth = true;                          
+                    // $mail->SMTPAuth = true;                          
                     //Provide username and password     
-                    $mail->Username = "carlrosales32998@gmail.com";                 
-                    $mail->Password = "Matthew29";                           
+                    // $mail->Username = "carlrosales32998@gmail.com";                 
+                    // $mail->Password = "Matthew29";                           
                     //If SMTP requires TLS encryption then set it
-                    $mail->SMTPSecure = "tls";                           
+                    // $mail->SMTPSecure = "tls";                           
                     //Set TCP port to connect to 
-                    $mail->Port = 25;  
+                    // $mail->Port = 25;  
+
+                    $to      = $email;
+                    $subject = 'Email Verification';
+                    $message = "Please Click on the link below <br><br> <a href='localhost/capstone_project/confirm.php?email=$email&token=$token'>Click Here</a>";
+
+                    $headers = 'From: carlrosales32998@gmail.com' . "\r\n" .
+                                'Reply-To: carlrosales32998@gmail.com' . "\r\n" .
+                                'X-Mailer: PHP/' . phpversion();
+                    $headers .= "Return-Path: carlrosales32998@gmail.com\r\n";
+                          // $headers .= "CC: sombodyelse@example.com\r\n";
+                    // $headers .= "BCC: " . $_POST['emailAddress'] . "\r\n";
+
+                          mail($to, $subject, $message, $headers);
+                      
 
 
-                    $mail->setFrom('carlrosales32998@gmail.com','Localhost');
-                    $mail->addAddress($email,$firstname,$middlename,$lastname,'Localhost');
-                    $mail->Subject = "Localhost Mail:";
-                    $mail->isHTML(true);
-                    $mail->Body = "Please Click on the link below <br><br> <a href='localhost/capstone_project/confirm.php?email=$email&token=$token'>Click Here</a>";
 
-                    if(!$mail->send()){
-                        $msg = "You have been registered! Please verify your email!";
-                    }
-                    else{
-                        $msg = "Something wrong happened! Please try again!";
-                    }
+
+
+
+
+                    // $mail->setFrom('carlrosales32998@gmail.com','Localhost');
+                    // $mail->addAddress($email,$firstname,$middlename,$lastname,'Localhost');
+                    // $mail->Subject = "Localhost Mail:";
+                    // $mail->isHTML(true);
+                    // $mail->Body = "Please Click on the link below <br><br> <a href='localhost/capstone_project/confirm.php?email=$email&token=$token'>Click Here</a>";
+
+                    // if(!$mail->send()){
+                    //     $msg = "You have been registered! Please verify your email!";
+                    // }
+                    // else{
+                    //     $msg = "Something wrong happened! Please try again!";
+                    // }
                 }
 
             } 
@@ -102,13 +135,17 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+
+
+
+
 </head>
 <body>
 
 
         <div class="bg-top navbar-light">
         <div class="container">
-            <div class="row no-gutters d-flex align-items-center align-items-stretch">
+            <div class="row no-gutters d-flex align-items-center align-items-stretch" id="div1">
                 <div class="col-md-4 d-flex align-items-center py-4">
                     <a class="navbar-brand" href="registration.php">JMSSTaffingSolutionInc.</a>
                 </div>
@@ -118,8 +155,7 @@
                             <div class="icon d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
                             <div class="text">
                                 <span>Email</span>
-                  <span>recruitment@jmsstaffingsolutions.com</span>
-                                
+                                <span>recruitment@jmsstaffingsolutions.com</span>   
                             </div>
                         </div>
                         <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
@@ -130,9 +166,8 @@
                         </div>
                         <div class="col-md topper d-flex align-items-center justify-content-end">
                             <p class="mb-0 d-block">
-                  <a class="btn btn-info btn-lg" href="applicant_registration.php" data-toggle="modal" data-target="#sign-up"><span>Register to Us</span></a>
+                            <a class="btn btn-info btn-lg" href="applicant_registration.php" data-toggle="modal" data-target="#sign-up"><span>Register to Us</span></a>
 
-                                </button>
                             </p>
                         </div>
                     </div>
@@ -154,9 +189,9 @@
                 <li class="nav-item"><a href="index.php" class="nav-link pl-0">Home</a></li>
                 <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
-              <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
-            <li class="nav-item active"><a href="applicant_registration.php" class="nav-link">Sign-up</a></li>
-            <li class="nav-item"><a href="frmlogin.php"class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
+                <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+                <li class="nav-item active"><a href="applicant_registration.php" class="nav-link">Sign-up</a></li>
+                <li class="nav-item"><a href="#"class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
             
            
             </ul>
@@ -165,23 +200,66 @@
       </nav>
     <!-- END nav -->
     <div class="container" style="margin-top: 100px;">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-md-offset-3" align="center">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" align="center" style="background-color: red; z-index: 2;">
                 <?php if($msg != "") echo $msg . "<br><br>"; ?>
-                <form method="post" action="registration.php">
-                    <input class="form-control" type="text" name="firstname" placeholder="Firstname..."><br>
-                    <input class="form-control" type="text" name="middlename" placeholder="Middlename..."><br>
-                    <input class="form-control" type="text" name="lastname" placeholder="Lastname..."><br>
-                    <input class="form-control" type="email" name="email" placeholder="Email..."><br>
-                    <input class="form-control" type="text" name="username" placeholder="Username..."><br>
-                    <input class="form-control" type="password" name="password" placeholder="Password..."><br>
-                    <input class="form-control" type="password" name="cPassword" placeholder="Confirm Password..."><br>
-                    <input class="btn btn-primary" type="submit" name="submit" value="Register"><br>
+                <form method="post" action="registration.php" autocomplete="off">
+          
+                  <input class="form-control input-sm" type="text" name="firstname" placeholder="Firstname..."><br>
+                  <input class="form-control" type="text" name="middlename" placeholder="Middlename..."><br>
+                  <input class="form-control" type="text" name="lastname" placeholder="Lastname..."><br>
+                  <input class="form-control" type="email" name="email" placeholder="Email..."><br>
+                  <input class="form-control" type="text" name="username" placeholder="Username..."><br>
+                  <input class="form-control" type="password" name="password" placeholder="Password..."><br>
+                  <input class="form-control" type="password" name="cPassword" placeholder="Confirm Password..."><br>
+                  <input class="btn btn-primary btn-lg-6" type="submit" name="submit" value="Register"><br>
+            
                 </form>
             </div>
         </div>
         
     </div>
+
+
+    <section id="modal_log-in">
+      <div class="modal fade" id="sign-in">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="login-logo">
+                <img src="dist/img/capstone/JMSSolution.png" class='img-responsive center-block' >
+              </div><!-- /.login-logo -->
+                  <?php
+                    Alert('#sign-in');
+                  ?>
+                  <h3><p class="login-box-msg ">Login to your Account</p></h3> 
+                  <!--  <h4 class="form-signin-heading">Login to your Account</h4>-->
+              <form action="logingin.php" method="post">
+                <input type='hidden' value='<?php echo $ipaddress ?>' id='ipadd' name='ipadd'>
+                <input type='hidden' value='<?php echo $ip_address['ip_address'] ?>' id='myipadd' name='myipadd'>
+                <div class="form-group has-feedback">
+                  <i class="glyphicon glyphicon-user form-control-feedback"></i>
+                  <input type="text" class="form-control" placeholder="Username" name='username'>
+                  <!--<span class="glyphicon glyphicon-user form-control-feedback"></span>-->
+                </div>
+                <div class="form-group has-feedback">
+                  <input type="password" class="form-control" placeholder="Password" name='password'>
+                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 col-xs-offset-0">
+                    <!--<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>-->
+                    <button type="submit" class="btn btn-lg btn-block bg-yellow">Login</button>
+                    <br/>
+                    <center><a class='text-yellow' href='forgot_password.php' >Forgot Password</a>
+                  </div><!-- /.col -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
    
 
 </body>
@@ -192,4 +270,25 @@
    
 
 
-  
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+    
+ 
+
+ <?php
+  Modal();
+  makeFoot();
+?>

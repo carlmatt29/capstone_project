@@ -47,7 +47,7 @@
                 <?php Alert(); ?>
                 <div class="box box-warning">
                     <div class="box-body">
-<form class='form-horizontal' action='save_personal_information.php' method="POST" enctype="multipart/form-data">
+<form class='form-horizontal' action='save_personal_information.php' method="POST" enctype="multipart/form-data" autocomplete="off">
 	<input type='hidden' name='id' value='<?php echo !empty($employee)?$employee['id']:''; ?>'>
   <br><br><br><br>
 	<div class="form-group">

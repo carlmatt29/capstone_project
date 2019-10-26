@@ -117,8 +117,8 @@
         <!-- pattern="[0-9]{2}-[0-9]{7}-[0-9]{1}" david removed this on  sss client doesn't need a pattern april 4 2019 -->
         <input type="text"  class='form-control sss' id="sss_no" placeholder="SSS Number" name='sss_no' value='<?php echo !empty($employee)?htmlspecialchars($employee['sss_no']):''; ?>'>
           <label for="w_sss" class="col-md-12 ">
-            <input type="checkbox" class="" id="w_sss" name='w_sss' <?php echo !empty($employee) && !empty($employee['w_sss'])?'checked="true"':''; ?> title='Deduct sss from payroll.' value='1'>
-            Deduct SSS from payroll
+            <input type="hidden" class="" id="w_sss" name='w_sss' <?php echo !empty($employee) && !empty($employee['w_sss'])?'checked="true"':''; ?> title='Deduct sss from payroll.' value='1'>
+            
           </label>
       </div>
     </div>
@@ -133,8 +133,8 @@
       <div class="col-md-7">
         <input type="text" pattern="[0-9]{2}-[0-9]{9}-[0-9]{1}" class='form-control philhealth' id="philhealth" placeholder="Philhealth" name='philhealth' value='<?php echo !empty($employee)?htmlspecialchars($employee['philhealth']):''; ?>'>
           <label for="w_philhealth" class="col-md-12">
-            <input type="checkbox" class="" id="w_philhealth"  name='w_philhealth' <?php echo !empty($employee) && !empty($employee['w_philhealth'])?'checked="true"':''; ?> title='Deduct philhealth from payroll.' value='1'>
-            Deduct Philhealth from payroll
+            <input type="hidden" class="" id="w_philhealth"  name='w_philhealth' <?php echo !empty($employee) && !empty($employee['w_philhealth'])?'checked="true"':''; ?> title='Deduct philhealth from payroll.' value='1'>
+            
           </label>
       </div>
     </div>
@@ -143,8 +143,8 @@
       <div class="col-md-7">
         <input type="text" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" class='form-control pagibig' id="pagibig" placeholder="Pagibig" name='pagibig' value='<?php echo !empty($employee)?htmlspecialchars($employee['pagibig']):''; ?>'>
           <label for="w_hdmf" class="col-md-12">
-            <input type="checkbox" class="" id="w_hdmf"  name='w_hdmf' <?php echo !empty($employee) && !empty($employee['w_hdmf'])?'checked="true"':''; ?> title='Deduct pagibig from payroll.' value='1'>
-            Deduct Pagibig from payroll
+            <input type="hidden" class="" id="w_hdmf"  name='w_hdmf' <?php echo !empty($employee) && !empty($employee['w_hdmf'])?'checked="true"':''; ?> title='Deduct pagibig from payroll.' value='1'>
+            
           </label>
       </div>
     </div>
@@ -193,9 +193,9 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="work_contact_no" class="col-md-3 control-label">Work Contact No </label>
+      <label for="work_contact_no" class="col-md-3 control-label"> </label>
       <div class="col-md-7">
-        <input type="number" class="form-control" id="work_contact_no" placeholder="Work Contact No" name='work_contact_no' value='<?php echo !empty($employee)?htmlspecialchars($employee['work_contact_no']):''; ?>' >
+        <input type="hidden" class="form-control" id="work_contact_no" placeholder="Work Contact No" name='work_contact_no' value='<?php echo !empty($employee)?htmlspecialchars($employee['work_contact_no']):''; ?>' >
       </div>
     </div>
     <div class="form-group">
@@ -205,21 +205,21 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="work_email" class="col-md-3 control-label">Work Email Address </label>
+      <label for="work_email" class="col-md-3 control-label"></label>
       <div class="col-md-7">
-        <input type="email" class="form-control" id="work_email" placeholder="Email Address" name='work_email' value='<?php echo !empty($employee)?htmlspecialchars($employee['work_email']):''; ?>'>
+        <input type="hidden" class="form-control" id="work_email" placeholder="Email Address" name='work_email' value='<?php echo !empty($employee)?htmlspecialchars($employee['work_email']):''; ?>'>
       </div>
     </div>
     <div class="form-group">
-      <label for="acu_id" class="col-md-3 control-label">Account No.  </label>
+      <label for="acu_id" class="col-md-3 control-label"></label>
       <div class="col-md-7">
-        <input type="text" class="form-control" id="account_no"  name='account_no' placeholder="Account No" value='<?php echo !empty($employee)?htmlspecialchars($employee['card_number']):''; ?>'>
+        <input type="hidden" class="form-control" id="account_no"  name='account_no' placeholder="Account No" value='<?php echo !empty($employee)?htmlspecialchars($employee['card_number']):''; ?>'>
       </div>
     </div>
     <div class="form-group">
-      <label for="acu_id" class="col-md-3 control-label">Access Unit ID  </label>
+      <label for="acu_id" class="col-md-3 control-label"></label>
       <div class="col-md-7">
-        <input type="text" class="form-control" id="acu_id"  name='acu_id' placeholder="Access Unit ID" value='<?php echo !empty($employee)?htmlspecialchars($employee['acu_id']):''; ?>'>
+        <input type="hidden" class="form-control" id="acu_id"  name='acu_id' placeholder="Access Unit ID" value='<?php echo !empty($employee)?htmlspecialchars($employee['acu_id']):''; ?>'>
       </div>
     </div>
         <div class="form-group">

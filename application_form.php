@@ -17,9 +17,9 @@
 				     <div class="row">
 						<div class="form-group; col-lg-6" style="margin: 8px 0"> <!-- MOVED : 4/26/2019-->
 							<h1>Position Applied For <span style="color: red">*</span></h1>
-							<select id="position_applied" class="required form-control" name="position_applied" required>
+							<select id="position_applied" class="required form-control cbo" name="position_applied" required>
 								<?php
-									$sql = $con->myQuery("SELECT id, code,description FROM job_title WHERE is_deleted=0 and is_available=1");
+									$sql = $con->myQuery("SELECT id, CONCAT(code,' (',company_name,')' ) as code,description FROM job_title WHERE is_deleted=0 and is_available=1");
 		
 									while($row=$sql->fetch(PDO::FETCH_ASSOC)){
 										echo "<option data-description ='".htmlspecialchars($row['description'])."'  value='" . $row['id'] . "'>" . $row['code'] . "</option>";
@@ -35,7 +35,7 @@
 				  
 				     </br>
 					<h3>Personal Info:</h3>
-					<form method="POST" id="user_form">
+					<form method="POST" id="user_form" autocomplete="off">
 						<div class="row">
 							<div class="form-group; col-lg-6" style="margin: 8px 0">
 								<label>Last Name<span style="color: red">*</span></label>
@@ -370,28 +370,17 @@
 								<label>Contact No.<span style="color: red">*</span></label>
 								<input type="text" class="required form-control" name="contact_no" id="contact_no" required>
 							</div>
-							<div class="form-group; col-lg-4" style="margin: 8px 0">
-								<label>Position Applied For <span style="color: red">*</span></label>
-								<select id="position_applied" class="required form-control" name="position_applied" required>
-									<?php
-										$sql = $con->myQuery("SELECT id, code,description FROM job_title WHERE is_deleted=0 and is_available=1");
-			
-										while($row=$sql->fetch(PDO::FETCH_ASSOC)){
-											echo "<option value='" . $row['id'] . "'>" . $row['code'] . "</option>";
-										}
-									?>
-								</select>
-							</div>
+						
 						</div>
 						
 						<div class="row">
-							<div class="form-group; col-lg-4" style="margin: 8px 0">
+							<!-- <div class="form-group; col-lg-4" style="margin: 8px 0">
 								<label>Monthly Salary Desired<span style="color: red">*</span></label>
 								<input type="number" class="required form-control" name="desired_monthly_salary" id="desired_monthly_salary" required>
-							</div>
+							</div> -->
 							<div class="form-group; col-lg-4" style="margin: 8px 0">
-								<label>Date Available for Work<span style="color: red">*</span></label>
-								<input type="date" class="required form-control" name="date_available_for_work" id="date_available_for_work" required>
+								<label><span style="color: red"></span></label>
+								<input type="hidden" class="required form-control" name="date_available_for_work" id="date_available_for_work" required>
 							</div>
 						</div>
 						

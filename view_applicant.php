@@ -29,14 +29,14 @@
 
 	# TEST CONDITION FOR VIEWING OF APPLICANTS APPLICATION FORM
 	if ($session['is_viewed'] == 1) {
-		if ($session['working_id'] != $id) {
-			if (empty($is_assessed["is_assessed"]) || $is_assessed["is_assessed"] == 0) {
-				redirect("recruitment.php");
-			}
-			if (empty($job_checker)) {
-				redirect("recruitment.php");
-			}
-		}
+		// if ($session['working_id'] != $id) {
+		// 	if (empty($is_assessed["is_assessed"]) || $is_assessed["is_assessed"] == 0) {
+		// 		redirect("recruitment.php");
+		// 	}
+		// 	if (empty($job_checker)) {
+		// 		redirect("recruitment.php");
+		// 	}
+		// }
 	} else if ($session['is_viewed'] == 0) {
 		$inputs['employees_id']=$_SESSION[WEBAPP]['user']['employee_id'];
 		$loggedin_user = "SELECT id, CONCAT(e.last_name, ', ', e.first_name) AS employee FROM employees e WHERE e.id=:employees_id";
@@ -82,7 +82,7 @@
 
 	# CHANGE THE VARIABLE NAME OF THE VARIABLE BELOW
 	// $position = $con->myQuery("SELECT id, description FROM job_title WHERE is_deleted = 0")->fetchAll(PDO::FETCH_ASSOC);
-	$position_ = $con->myQuery("SELECT id AS pos_id, description FROM job_title WHERE is_deleted = 0");
+	$position_ = $con->myQuery("SELECT id AS pos_id,code, description FROM job_title WHERE is_deleted = 0");
 	$position_count = $position_->rowCount();
 
 	$applied_position = $con->myQuery("SELECT position.process_id FROM tbl_applicant AS applicant INNER JOIN tbl_position AS position ON applicant.position_applied = position.id WHERE applicant.id=1");
@@ -202,7 +202,7 @@
 						</div>-->
 						
 						<div class="row">
-						<form action="application_form_view.php" method="post">
+						<form action="application_form_view.php" method="post" autocomplete="off">
 						    <input style="display:none;" value="<?php echo $applicant_id; ?> " name="applicant_id">
 							<input class="btn btn-primary" style="width:80%;" type="submit" value="View Application Form"/>
 						</form>
@@ -268,9 +268,9 @@
 				<!-- <button class="btn btn-warning" data-toggle="modal" data-target="#add_process_owner">Add Process Owner</button> -->
 			</div>
 			<div class="col-md-6 text-right" style="margin-bottom:10px;">
-			    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#processOwner" <?php if(empty($assessed_by) || ($applicant["assessed_by_id"] != $id)){ echo 'disabled';} ?> >Add Process Owner</button>
+			    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#processOwner" <?php if(empty($assessed_by) || ($applicant["assessed_by_id"] != $id)){ echo 'disabled';} ?> >Add Interviewer</button>
 			    
-			    <Center><Font style='font-size:11px;'> Note: Click <a style='font-size:11px' href="https://hrms-lefort.sparkglobaltech02.com/job_title.php">here </a> to update preset interviewer(s) </Font></Center>
+			    <Center><Font style='font-size:11px;'> Note: Click <a style='font-size:11px' href="job_title.php">here </a> to update preset interviewer(s) </Font></Center>
 			</div>  
 			
 			<div class="col-md-12">
@@ -317,7 +317,7 @@
 									<?php
 										if ($position_count > 0) {
 											while ($row = $position_->fetch(PDO::FETCH_ASSOC)) {
-												echo '<option value="'.$row['pos_id'].'">'.$row['description'].' </option>';
+												echo '<option value="'.$row['pos_id'].'">'.$row['code'].' </option>';
 											}
 										} else {
 											echo "<option>Position not available</option>";

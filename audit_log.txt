@@ -101,5 +101,40 @@
     "Deleted Test from job titles.",
     "2019-10-01 01:47:59"
 ]
+,[
+    "Villamor, Aaron Spencer V",
+    "Deleted username from users.",
+    "2019-10-01 04:19:34"
+]
+,[
+    "Villamor, Aaron Spencer V",
+    "Deleted haha from users.",
+    "2019-10-01 04:19:41"
+]
+,[
+    "Rosales, Carl Matthew Pontaniel",
+    "Deleted design power-producing machines such as electric generators, internal combustion engines, and steam and gas turbines as well as power-using machines, such as refrigeration and air-conditioning systems. from job titles.",
+    "2019-10-16 08:45:42"
+]
+,[
+    "Rosales, Carl Matthew Pontaniel",
+    "Deleted design, develop, and test electrical devices and equipment, including communications systems, power generators, motors and navigation systems, and electrical systems for automobiles and aircraft. They also oversee the manufacture of these devices, systems from job titles.",
+    "2019-10-16 08:45:55"
+]
+,[
+    "Villamor, Aaron Spencer V",
+    "Deleted Jether Torres from employees.",
+    "2019-10-16 08:59:25"
+]
+,[
+    "Villamor, Aaron Spencer V",
+    "Deleted jether from users.",
+    "2019-10-16 09:01:41"
+]
+,[
+    "Faller, Aaron Spencer V",
+    "Deleted Jhed Pabanelas from employees.",
+    "2019-10-23 01:33:20"
+]
 	]
 }

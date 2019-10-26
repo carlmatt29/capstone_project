@@ -100,13 +100,11 @@ makeHead("Login");
             <div class="modal-body">
               <div class="login-logo">
                 <img src="dist/img/capstone/JMSSolution.png" class='img-responsive center-block' >
-              </div><!-- /.login-logo -->
-                  <?php
-                    Alert();
-                  ?>
+              </div><!-- login-logo -->
+                  <?php if($msg != "") echo $msg . "<br><br>"; ?>
                   <h3><p class="login-box-msg ">Login to your Account</p></h3> 
                   <!--  <h4 class="form-signin-heading">Login to your Account</h4>-->
-              <form action="logingin.php" method="post">
+              <form action="logingin.php" method="post" autocomplete="off">
                 <input type='hidden' value='<?php echo $ipaddress ?>' id='ipadd' name='ipadd'>
                 <input type='hidden' value='<?php echo $ip_address['ip_address'] ?>' id='myipadd' name='myipadd'>
                 <div class="form-group has-feedback">

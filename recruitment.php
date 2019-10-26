@@ -21,9 +21,13 @@
 	// }
 
 	// UNCOMMENT BELOW FOR FUTURE QUERY
-	$query = $con->myQuery("SELECT applicant.id, CONCAT(profile.last_name, ', ', profile.first_name, ' ', IFNULL(profile.middle_name, '')) AS applicant_name, profile.email, profile.contact_number, applicant.application_number, (CASE WHEN applicant.is_assessed = 1 THEN 'Assessed' ELSE status.description END) AS application_status, applicant.application_status_id, applicant.is_assessed, status.description, applicant.is_viewed, IFNULL(applicant.working, '') AS working, applicant.working_datetime, (SELECT CONCAT(emp.last_name, ', ', emp.first_name) AS process_owner FROM employees emp WHERE emp.id = applicant.interviewer_id) AS process_owner,  position.description, applicant.desired_monthly_salary, applicant.date_available_for_work, applicant.date_of_contact, applicant.interview_date, applicant.date_applied FROM tbl_applicant AS applicant INNER JOIN tbl_applicant_profile AS profile ON applicant.applicant_id = profile.id INNER JOIN tbl_application_status AS status ON applicant.application_status_id = status.id left JOIN job_title AS position ON applicant.position_applied = position.id WHERE applicant.application_status_id != 8");
+	$query = $con->myQuery("SELECT applicant.id, CONCAT(profile.last_name, ', ', profile.first_name, ' ', IFNULL(profile.middle_name, '')) AS applicant_name, profile.email, profile.contact_number, applicant.application_number, status.description AS application_status, applicant.application_status_id, applicant.is_assessed, status.description, applicant.is_viewed, IFNULL(applicant.working, '') AS working, applicant.working_datetime, (SELECT CONCAT(emp.last_name, ', ', emp.first_name) AS process_owner FROM employees emp WHERE emp.id = applicant.interviewer_id) AS process_owner,  position.code as position_name, applicant.desired_monthly_salary, applicant.date_available_for_work, applicant.date_of_contact, applicant.interview_date, applicant.date_applied FROM tbl_applicant AS applicant 
+		INNER JOIN tbl_applicant_profile AS profile ON applicant.applicant_id = profile.id 
+		INNER JOIN tbl_application_status AS status ON applicant.application_status_id = status.id 
+		LEFT JOIN job_title AS position ON applicant.position_applied = position.id 
+		WHERE applicant.application_status_id != 8");
 
-	$sample = $con->myQuery("SELECT applicant.id, applicant.is_assessed, CONCAT(profile.last_name, ', ', profile.first_name, ' ', IFNULL(profile.middle_name, '')) AS applicant_name, profile.email, profile.contact_number, applicant.application_number, applicant.application_status_id, status.description, applicant.is_viewed, IFNULL(applicant.working, '') AS working, applicant.working_datetime, CONCAT(employee.last_name, ', ', employee.first_name) AS process_owner, position.position_name, applicant.desired_monthly_salary, applicant.date_available_for_work, applicant.date_of_contact, applicant.interview_date, applicant.date_applied FROM tbl_applicant AS applicant INNER JOIN tbl_applicant_profile AS profile ON applicant.applicant_id = profile.id INNER JOIN tbl_application_status AS status ON applicant.application_status_id = status.id LEFT JOIN tbl_employee AS employee ON applicant.pending_interview_status = employee.id INNER JOIN tbl_position AS position ON applicant.position_applied = position.id WHERE applicant.application_status_id != 8");
+	$sample = $con->myQuery("SELECT applicant.id, applicant.is_assessed, CONCAT(profile.last_name, ', ', profile.first_name, ' ', IFNULL(profile.middle_name, '')) AS applicant_name, profile.email, profile.contact_number, applicant.application_number, applicant.application_status_id, status.description, applicant.is_viewed, IFNULL(applicant.working, '') AS working, applicant.working_datetime, CONCAT(employee.last_name, ', ', employee.first_name) AS process_owner, position.position_name as position_name, applicant.desired_monthly_salary, applicant.date_available_for_work, applicant.date_of_contact, applicant.interview_date, applicant.date_applied FROM tbl_applicant AS applicant INNER JOIN tbl_applicant_profile AS profile ON applicant.applicant_id = profile.id INNER JOIN tbl_application_status AS status ON applicant.application_status_id = status.id LEFT JOIN tbl_employee AS employee ON applicant.pending_interview_status = employee.id INNER JOIN tbl_position AS position ON applicant.position_applied = position.id WHERE applicant.application_status_id != 8");
 
 	while ($test = $sample->fetch(PDO::FETCH_ASSOC)) {
 		if ($test["is_assessed"] == 0 && $test["working_datetime"] != "0000-00-00 00:00:00") {
@@ -116,7 +120,7 @@
 </div>
 
 <script type="text/javascript">
-/*
+
 	function update_applicant_view() {
 		// $.ajax({
 		// 	type: "PATCH",
@@ -131,7 +135,7 @@
 	{
 		$('#resultTable').DataTable(
 		{
-			"scrollX": true,
+			// "scrollX": true,
 			// dom: 'Bfrtip',
 			// buttons: [
 			// {
@@ -141,7 +145,7 @@
 		});
 		getUsers();
 	});
-	*/
+	
 </script>
 
 <?php

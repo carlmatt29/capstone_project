@@ -77,6 +77,7 @@ makeHead("Login");
 	        	<li class="nav-item active"><a href="about.php" class="nav-link">About</a></li>
 	        	<li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="applicant_registration.php" class="nav-link">Sign up</a></li>
             <li class="nav-item"><a href="#"class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
 	        </ul>
 	      </div>
@@ -99,7 +100,7 @@ makeHead("Login");
                   ?>
                   <h3><p class="login-box-msg ">Login to your Account</p></h3> 
                   <!--  <h4 class="form-signin-heading">Login to your Account</h4>-->
-              <form action="logingin.php" method="post">
+              <form action="logingin.php" method="post" autocomplete="off">
                 <input type='hidden' value='<?php echo $ipaddress ?>' id='ipadd' name='ipadd'>
                 <input type='hidden' value='<?php echo $ip_address['ip_address'] ?>' id='myipadd' name='myipadd'>
                 <div class="form-group has-feedback">

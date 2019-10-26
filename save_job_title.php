@@ -5,9 +5,9 @@
 		die();
 	}
 
-    // if(!AllowUser(array(1,4))){
-    //     redirect("template.php");
-    // }
+    if(!AllowUser(array(1,4))){
+        redirect("index.php");
+    }
 
 
 		if(!empty($_POST)){
@@ -53,8 +53,8 @@
 		else{
 			//IF id exists update ELSE insert
 			$inputs['process_id']="";
-			$lastrow = $con->myQuery("select auto_increment as id from information_schema.tables where table_schema = 'db_capstone' and table_name =  'job_title'")->fetch(PDO::FETCH_ASSOC);
-			$inputs['process_id'] = $lastrow['id'];
+			$lastrow = $con->myQuery("SELECT id FROM job_title ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+			$inputs['process_id'] = $lastrow['id'] + 1;
 			if(empty($inputs['id'])){
 				//Insert
 				
@@ -68,8 +68,9 @@
 	unset($inputs['id']);
 				
 				
-				$con->myQuery("INSERT INTO job_title(code,description,employee_process_id,process_id,is_available,employee_need) VALUES(:name,:description,:emp_id,:process_id,:is_available,:employee_need)",$inputs);
-	
+				$check = $con->myQuery("INSERT INTO job_title(code,location,minimum_salary,maximum_salary,description,company_name,employee_process_id,process_id,is_available,employee_need) VALUES(:name,:location,:minimum_salary,:maximum_salary,:description,:company_name,:emp_id,:process_id,:is_available,:employee_need)",$inputs);	
+				// print_r($inputs);
+				// die();
 	$con->commit();
     } catch (Exception $e) {
 	$con->rollback();
@@ -86,7 +87,8 @@
 	    $inputs['is_available']=0;
 	}
 	$inputs['process_id']= $inputs['id'];
-	$con->myQuery("UPDATE job_title SET code=:name,description=:description,employee_process_id=:emp_id,is_available=:is_available,process_id=:process_id,employee_need=:employee_need WHERE id=:id",$inputs);
+	$con->myQuery("UPDATE job_title SET code=:name,location=:location,minimum_salary=:minimum_salary,maximum_salary=:maximum_salary,description=:description,company_name=:company_name,employee_process_id=:emp_id,is_available=:is_available,process_id=:process_id,employee_need=:employee_need WHERE id=:id",$inputs);
+	$con->commit();
     } catch (Exception $e) {
 	$con->rollback();
 	error_logs('Job Title',$e);
@@ -100,8 +102,8 @@
 		die;
 	}
 	else{
-		redirect('template.php');
+		redirect('index.php');
 		die();
 	}
-	redirect('template.php');
+	redirect('index.php');
 ?>

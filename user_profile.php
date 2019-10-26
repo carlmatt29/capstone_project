@@ -112,7 +112,7 @@
                 <div class="box-body">
                   <div class="row">
                   <div class='col-md-12'>
-                    <form action="download_employee_details.php" method="post" name="export_excel">
+                    <form action="download_employee_details.php" method="post" name="export_excel" autocomplete="off">
                       <div class="control-group">
                         <div class="controls">
                           <input type='hidden' name='employees_id' value=<?php echo $inputs['employees_id']; ?>>

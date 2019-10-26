@@ -3,7 +3,7 @@
     <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <?php if (AllowUser(array(2, 4 , 3))): ?>
+            <?php if (AllowUser(array(3))): ?>
             
                  <!--david-->
                 <li>
