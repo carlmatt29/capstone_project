@@ -42,8 +42,8 @@
     </section>
 
     <section class="content">
-        <div class="row">
-            <div class='col-md-12'>
+      <div class="row">
+          <div class='col-md-12'>
                 <?php Alert(); ?>
                 <div class="box box-warning">
                     <div class="box-body">
@@ -231,7 +231,6 @@
 </form>
                             </div><!-- /.col -->
                         </div><!-- /.row -->
-
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
             </div>
