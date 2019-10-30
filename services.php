@@ -84,7 +84,7 @@ makeHead("Login");
 	        	<li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
 	        	<li class="nav-item active"><a href="services.php" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
-            <li class="nav-item"><a href="applicant_registration.php" class="nav-link">Sign up</a></li>
+            <li class="nav-item"><a href="register.php" class="nav-link">Sign up</a></li>
 	         	<li class="nav-item"><a href="#"class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
 	        </ul>
 	      </div>
