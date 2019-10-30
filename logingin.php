@@ -20,19 +20,14 @@
 			redirect('index.php');
 		}
 		else {
-			
+
 			$_SESSION[WEBAPP]['user']=$user;
 			refresh_activity($_SESSION[WEBAPP]['user']['id']);
 			redirect("template.php");
-			}	
-		
-
-		
-
-		
+			}
 		die;
 	} else {
-	
+
 		die();
 	}
 

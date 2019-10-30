@@ -43,9 +43,9 @@ function encryptIt($q)
 {
     //edited by david
     $cryptKey  = 'JPB0rGtIn5UB1xG03efyCp';
-    $qEncoded      = 
+    $qEncoded      =
     base64_encode(openssl_encrypt($q, 'AES-256-CBC',$cryptKey, OPENSSL_RAW_DATA));
-    
+
     //(old deprecated dont use the code below:)
     /*$cryptKey  = 'JPB0rGtIn5UB1xG03efyCp';
     $qEncoded      = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey), $q, MCRYPT_MODE_CBC, md5(md5($cryptKey))));*/
@@ -58,7 +58,7 @@ function decryptIt($q)
     //edited by david
     $cryptKey  = 'JPB0rGtIn5UB1xG03efyCp';
     $qDecoded      = openssl_decrypt(base64_decode($q),'AES-256-CBC',$cryptKey,OPENSSL_RAW_DATA);
-    
+
     //(old deprecated dont use the code below:)
    /* $cryptKey  = 'JPB0rGtIn5UB1xG03efyCp';
     $qDecoded      = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($cryptKey), base64_decode($q), MCRYPT_MODE_CBC, md5(md5($cryptKey))), "\0");*/
@@ -277,7 +277,7 @@ function getDefaultShift($employee, $date)
 
 function getShift($employee, $date)
 {
-   
+
 }
 
 
@@ -291,7 +291,8 @@ if (isLoggedIn()) {
         session_destroy();
         session_start();
         Alert("Your account has been deactivated.", "danger");
-        redirect('frmlogin.php');
+     /*   redirect('frmlogin.php');*/
+        redirect('index.php');
         die;
     }
     if (is_active($_SESSION[WEBAPP]['user']['id'])) {
@@ -303,4 +304,4 @@ if (isLoggedIn()) {
     }
 }
 
-$con->myQuery("SET time_zone ='-4:00'"); 
+$con->myQuery("SET time_zone ='-4:00'");

@@ -63,11 +63,7 @@ makeHead("Login");
 						    	<span>Call Us: (02)‎ 281-6535</span>
 						    </div>
 					    </div>
-					    <div class="col-md topper d-flex align-items-center justify-content-end">
-					    	<p class="mb-0">
-					    		<a class="btn btn-info btn-lg" href="applicant_registration.php" data-toggle="registration.php" data-target="#sign-up"><span>Register to Us</span></a>
-					    	</p>
-					    </div>
+
 				    </div>
 			    </div>
 		    </div>

@@ -1,16 +1,17 @@
 <?php
-  require_once("support/config.php");
+require_once("support/config.php");
 
-  if(isLoggedIn()){
+if(isLoggedIn()){
     redirect("template.php");
     die();
   }
-
-
-
 makeHead("Login");
 
+
 ?>
+
+
+
 
 
 <title></title>
@@ -36,7 +37,7 @@ makeHead("Login");
         <div class="container">
             <div class="row no-gutters d-flex align-items-center align-items-stretch" id="div1">
                 <div class="col-md-4 d-flex align-items-center py-4">
-                    <a class="navbar-brand" href="registration.php">JMSSTaffingSolutionInc.</a>
+                    <a class="navbar-brand" href="index.php">JMSSTaffingSolutionInc.</a>
                 </div>
                 <div class="col-lg-8 d-block">
                     <div class="row d-flex">
@@ -53,12 +54,7 @@ makeHead("Login");
                                 <span>Call Us: (02)‎ 281-6535</span>
                             </div>
                         </div>
-                        <div class="col-md topper d-flex align-items-center justify-content-end">
-                            <p class="mb-0 d-block">
-                            <a class="btn btn-info btn-lg" href="applicant_registration.php" data-toggle="modal" data-target="#sign-up"><span>Register to Us</span></a>
 
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -81,26 +77,54 @@ makeHead("Login");
                 <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
                 <li class="nav-item active"><a href="applicant_registration.php" class="nav-link">Sign-up</a></li>
                 <li class="nav-item"><a href="#"class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
-
-
             </ul>
           </div>
         </div>
       </nav>
     <!-- END nav -->
-    <div class="container" style="margin-top: 100px;">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3" align="center" style=" z-index: 2;">
-              <!--   <?php if($msg != "") echo $msg . "<br><br>"; ?> -->
-                <form method="post" action="registration.php" autocomplete="off">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">Register to Us</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="container" style="margin: 3% 30% 5% 30%; ">
+        <div class="row" style="margin: 10px 10px 20px 10px; ">
+            <div class="col-md-6 col-md-offset-3" style=" z-index: 3; margin: 2% 0% 5% 0%; background-color: #e8e4c9;">
+              <h1>Registration Form</h1>
+                  <div class="login-logo">
+                      <img src="dist/img/capstone/JMSSolution.png" class='img-responsive center-block' >
+                  </div>
+                   <!-- <center><h3><?php if($msg != "") echo $msg . "<br><br>"; ?></h3></center> -->
+                <form method="post" action="registration.php" autocomplete="off" style="margin: 5% 5% 5% 5%;">
+                  <label for="inputlg">Firstname</label>
                   <input class="form-control input-sm" type="text" name="firstname" placeholder="Firstname..."><br>
+
+                  <label for="inputlg">Middlename</label>
                   <input class="form-control" type="text" name="middlename" placeholder="Middlename..."><br>
+
+                  <label for="inputlg">Lastname</label>
                   <input class="form-control" type="text" name="lastname" placeholder="Lastname..."><br>
+
+                  <label for="inputlg">Email</label>
                   <input class="form-control" type="email" name="email" placeholder="Email..."><br>
+
+                  <label for="inputlg">Username</label>
                   <input class="form-control" type="text" name="username" placeholder="Username..."><br>
+
+                  <label for="inputlg">Password</label>
                   <input class="form-control" type="password" name="password" placeholder="Password..."><br>
+
+                  <label for="inputlg">Confirm Password</label>
                   <input class="form-control" type="password" name="cPassword" placeholder="Confirm Password..."><br>
-                  <input class="btn btn-primary btn-lg" type="submit" name="submit" value="Register"><br>
+
+                  <center><input class="btn btn-primary btn-block" type="submit" name="submit" value="Register"><br></center>
                 </form>
             </div>
         </div>

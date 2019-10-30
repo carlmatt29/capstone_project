@@ -14,10 +14,13 @@ require '.\PHPMailer\PHPMailer.php';
 require '.\PHPMailer\SMTP.php';
 require '.\PHPMailer\OAuth.php';
 
+$msg = "";
 
 
 
 if (!empty($_POST)) {
+
+
 
 	$inputs = $_POST;
 
@@ -40,8 +43,6 @@ if (!empty($_POST)) {
 		);
 
 		$con->myQuery("INSERT INTO employees(code,first_name,middle_name,last_name) VALUES (:code,:first_name,:middle_name,:last_name)", $params_applicant);
-
-
 		// print_r($app_id['applicant_id']);
 		// 		die();
 		$inputs['applicant_id'] = $applicant_id = $con->lastInsertId();
@@ -76,19 +77,15 @@ if (!empty($_POST)) {
 		$mail->setFrom('carlrosales32998@gmail.com','JMSStaffingSolutionInc.');
 		$mail->addAddress($inputs['email']);
 		$mail->addReplyTo('carlrosales32998@gmail.com');
-
 		$mail->isHTML(true);                                  // Set email format to HTML
 		$mail->Subject = 'Email Verification';
-		$mail->Body = "Please Click on the link below <br><br> <a href='localhost/capstone_project/confirm.php?email=$to&token=$token'>Click Here</a>";
-
+		$mail->Body = "Please Click on the link below <br><br> <a href='localhost/capstone_project/confirm.php?email=$email&token=$token'>Click Here</a>";
 		$result = $mail->send();
-
 		if($result) {
-			$_SESSION["registration"] = true;
-			
+					$_SESSION["registration"] = true;
 		} else {
 			$_SESSION["registration"] = false;
-	
+
 		}
 
 		Alert("Save succesful", "success");
@@ -96,11 +93,19 @@ if (!empty($_POST)) {
 		redirect("index.php");
 
 		$con->commit();
+
+
+
 	} catch (Exception $e) {
 		$con->rollback();
-		error_logs('User', $e);
+				error_logs('User', $e);
 		echo "<pre>";
 		print_r($e);
 		echo "</pre>";
 	}
+
+
+
 }
+
+?>

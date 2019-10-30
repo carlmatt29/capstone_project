@@ -64,12 +64,7 @@ makeHead("Login");
               <span>Call Us: (02)‎ 281-6535</span>
             </div>
           </div>
-          <div class="col-md topper d-flex align-items-center justify-content-end">
-            <p class="mb-0 d-block">
-              <a class="btn btn-info btn-lg" href="applicant_registration.php" data-toggle="registration.php" data-target="#sign-up"><span>Register to Us</span></a>
-              </button>
-            </p>
-          </div>
+
         </div>
       </div>
     </div>
@@ -90,7 +85,7 @@ makeHead("Login");
         <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
         <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
         <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
-        <li class="nav-item"><a href="applicant_registration.php" class="nav-link">Sign up</a></li>
+        <li class="nav-item"><a href="register.php" class="nav-link">Sign up</a></li>
         <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
 
 

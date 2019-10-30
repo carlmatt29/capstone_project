@@ -18,12 +18,12 @@
   			die;
   		}
 	}
-	
-	
+
+
 	$emp_id = explode(',',$data['employee_process_id']);
 	$ctr=0;
 	$emp_size = sizeOf($emp_id);
-	
+
 	$employees=$con->myQuery("SELECT id,CONCAT(last_name,', ',first_name,' ',middle_name,' (',code,')') as employee_name FROM employees WHERE is_deleted=0 AND is_terminated=0 ORDER BY last_name")->fetchAll(PDO::FETCH_ASSOC);
 	$hired=$con->myQuery("SELECT id,CONCAT(last_name,', ',first_name,' ',middle_name) as employee_name,work_contact_no,work_email,address1 FROM employees WHERE is_deleted=0 AND is_terminated=0 AND job_title_id=? ORDER BY last_name",array($_GET['id'])); // ADDED By Marckus : 4/25/2019
 
@@ -33,7 +33,7 @@
 <style>
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
     color:black;
-        
+
     }
 </style>
 
@@ -78,7 +78,7 @@
                       <div class="form-group">
                           <label for="name" class="col-sm-2 control-label">Location *</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="location" placeholder="Location" name='location' pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{3}" value='<?php echo !empty($data)?htmlspecialchars($data['location']):''; ?>' required>
+                            <input type="text" class="form-control" id="location" placeholder="Location" name='location' value='<?php echo !empty($data)?htmlspecialchars($data['location']):''; ?>' required>
                           </div>
                       </div>
 
@@ -109,16 +109,16 @@
                             <input type="text" class="form-control" id="company_name" placeholder="Company Name" name='company_name' value='<?php echo !empty($data)?htmlspecialchars($data['company_name']):''; ?>' required>
                           </div>
                       </div>
-                      
+
                       <div class="form-group">
                           <label for="name" class="col-sm-2 control-label"></label>
                           <div class="col-sm-9">
                             <input type="checkbox"  placeholder="Available" name='is_available' value="1" <?php if($data['is_available']==1){echo "checked";} ?> >For Hiring
                           </div>
                       </div>
-                      
-                      
-                     <!-- <div class="form-group"> 
+
+
+                     <!-- <div class="form-group">
                           <label for="name" class="col-sm-2 control-label">Interviewer *</label>
                           <div class="col-sm-9">
                             <input type="hidden" class="emp_pos" value="<?php //echo $data['employee_process_id']; ?>"/>
@@ -134,7 +134,7 @@
                             <input type="number" class="form-control" id="employee_need" placeholder="Enter Total Employee" name='employee_need' value='<?php echo !empty($data)?htmlspecialchars($data['employee_need']):''; ?>' required>
                           </div>
                       </div>
-                      
+
 
 		                    <div class="form-group">
 		                      <div class="col-sm-9 col-md-offset-2 text-center">
@@ -142,14 +142,14 @@
 		                        <button type='submit' class='btn btn-warning'>Save </button>
 		                      </div>
 		                    </div>
-		                </form>	
+		                </form>
                 	</div>
                   </div><!-- /.row -->
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div>
           </div><!-- /.row -->
-         
+
           <div class="row">
             <div class='col-md-10 col-md-offset-1'>
               <div class="box box-warning">
@@ -195,17 +195,17 @@
   $(function () {
         $('#ResultTable').DataTable();
       });
-     
-    
+
+
     e = $(".emp_pos").val();
 
-    if (e != ''){  
+    if (e != ''){
       var arr = new Array();
       var e=$(".emp_pos").val();
       arr = e.split(",");
       $("#employees_id").val(arr).change();
     }
-      
+
 </script>
 
 <?php
