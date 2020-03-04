@@ -33,6 +33,8 @@
 		else {
 			$_SESSION[WEBAPP]['user']=$user;
 			refresh_activity($_SESSION[WEBAPP]['user']['id']);
+
+			Alert("Login Successful!", "success");
 			redirect("template.php");
 			}
 			}

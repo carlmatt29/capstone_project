@@ -3,7 +3,7 @@
 
 	$mydate = new DateTime();
 	$date_today = $mydate->format('Y-m-d H:i:s');
-	
+
 
 	$email = $_POST['email'];
 	$contact_no = $_POST['contact_no'];
@@ -50,12 +50,12 @@
 			':school_name'	=>	$_POST['hidden_school_name'][$count],
 			':school_address'	=>	$_POST['hidden_school_address'][$count],
 			':school_year_attended_from'	=>	$_POST['hidden_school_year_attended_from'][$count],
-			':school_year_attended_to'	=>	$_POST['hidden_school_year_attended_to'][$count]			
+			':school_year_attended_to'	=>	$_POST['hidden_school_year_attended_to'][$count]
 		);*/
-		
+
 		$d_data = $_POST['value'];
         $ctr = sizeof($d_data);
-        
+
         $row =0;
         while($row<$ctr){
             $data = array(
@@ -64,26 +64,26 @@
 			'school_name'	=>	$d_data[$row][1],
 			'school_address'	=>	$d_data[$row][2],
 			'school_year_attended_from'	=>	$d_data[$row][3],
-			'school_year_attended_to'	=>	$d_data[$row][4]			
-		    );    
-                
-            $con->myQuery("INSERT INTO tbl_applicant_education(applicant_id, education_level_id, school_name, school_address, school_year_attended_from, school_year_attended_to) VALUES (:applicant_id, (SELECT id FROM tbl_education_level WHERE education_type = :education_level), :school_name, :school_address, :school_year_attended_from, :school_year_attended_to)", $data);    
+			'school_year_attended_to'	=>	$d_data[$row][4]
+		    );
+
+            $con->myQuery("INSERT INTO tbl_applicant_education(applicant_id, education_level_id, school_name, school_address, school_year_attended_from, school_year_attended_to) VALUES (:applicant_id, (SELECT id FROM tbl_education_level WHERE education_type = :education_level), :school_name, :school_address, :school_year_attended_from, :school_year_attended_to)", $data);
         $row++;
         }
-        
+
         $work_data = $_POST['workvalue'];
         $workctr = sizeof($work_data);
         $row =0;
-        
+
         while($row<$workctr){
-        
+
             $con->myQuery("Insert INTO tbl_applicant_work_experience(applicant_id,company_name,date_range_from,date_range_to,is_present,company_address,nature_of_work,monthly_salary,reason_for_leaving) values ('".$applicant_id."','".$work_data[$row][0]."','".$work_data[$row][2]."','".$work_data[$row][3]."','1','".$work_data[$row][1]."','".$work_data[$row][4]."','".$work_data[$row][5]."','".$work_data[$row][6]."')");
             $row++;
         }
-        
-        
 
-	
+
+
+
 
 	//}
 
@@ -99,6 +99,9 @@
 
 		//$con->myQuery("INSERT INTO tbl_sample(email, first_name, last_name, desired_salary) VALUES (:school_name, :school_address, :school_year, (SELECT id FROM tbl_education_level WHERE education_type = :desired_salary))",$data);
 	}
+              Alert("Submit succesful", "success");
 
-	
+              redirect("template.php");
+
+
 ?>

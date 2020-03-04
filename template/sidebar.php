@@ -4,17 +4,15 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <?php if (AllowUser(array(3))): ?>
-            
-                 <!--david-->
+
                 <li>
-                    <a href="application_form.php">
-                        <i class="fa fa-edit"></i> <span>Application Form</span>
+                    <a href="template.php">
+                        <i class="fa fa-edit"></i> <span>Job Open</span>
                     </a>
                 </li>
-                <!--david -->     
             <?php endif; ?>
 
-            
+
             <?php if (AllowUser(array(2, 4))): ?>
                 <li>
                     <a href="recruitment.php">
@@ -22,7 +20,7 @@
                     </a>
                 </li>
             <?php endif; ?>
-            <?php if (AllowUser(array(2, 4))): ?>
+            <?php if (AllowUser(array(2))): ?>
                 <li>
                     <a href="job_title.php">
                         <i class="fa fa-check-square-o"></i> <span>Job Title</span>
@@ -57,14 +55,14 @@
                     </a>
                 </li>
             <?php endif; ?>
-            
+
             <!-- Ticketing start -->
-            
+
         </ul>
     </section>
 <!-- /.sidebar -->
 </aside>
 <script type="text/javascript">
-  
+
 
 </script>

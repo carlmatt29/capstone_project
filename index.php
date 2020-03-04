@@ -46,7 +46,7 @@ makeHead("Login");
   <div class="container">
     <div class="row no-gutters d-flex align-items-center align-items-stretch">
       <div class="col-md-4 d-flex align-items-center py-4">
-        <a class="navbar-brand" href="index.php">JMSSTaffingSolutionInc.</a>
+        <a class="navbar-brand" href="index.php">JMSSS Inc.</a>
       </div>
       <div class="col-lg-8 d-block">
         <div class="row d-flex">
@@ -78,7 +78,6 @@ makeHead("Login");
       <span class="oi oi-menu"></span> Menu
     </button>
 
-
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active"><a href="index.php" class="nav-link pl-0">Home</a></li>
@@ -94,6 +93,7 @@ makeHead("Login");
   </div>
 </nav>
 <!-- END nav -->
+
 
 
 <!-- Start Login -->
@@ -112,17 +112,18 @@ makeHead("Login");
           <h3>
             <p class="login-box-msg ">Login to your Account</p>
           </h3>
+          <?php Alert(); ?>
           <!--  <h4 class="form-signin-heading">Login to your Account</h4>-->
           <form action="logingin.php" method="post" autocomplete="off">
             <input type='hidden' value='<?php echo $ipaddress ?>' id='ipadd' name='ipadd'>
             <input type='hidden' value='<?php echo $ip_address['ip_address'] ?>' id='myipadd' name='myipadd'>
             <div class="form-group has-feedback">
               <i class="glyphicon glyphicon-user form-control-feedback"></i>
-              <input type="text" class="form-control" placeholder="Username" name='username'>
+              <input type="text" class="form-control" placeholder="Username" name='username' required="">
               <!--<span class="glyphicon glyphicon-user form-control-feedback"></span>-->
             </div>
             <div class="form-group has-feedback">
-              <input type="password" class="form-control" placeholder="Password" name='password'>
+              <input type="password" class="form-control" placeholder="Password" name='password' required="">
               <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">

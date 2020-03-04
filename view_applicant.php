@@ -4,18 +4,23 @@
 		toLogin();
 		die();
 	}
-	ini_set("display_error",1);
 
-	session_start();
+	//session_start();
 
 	$id = $_SESSION[WEBAPP]['user']['id'];
 	$applicant_id = $_GET['id'];
 
-	$session = $con->myQuery("SELECT * FROM tbl_applicant WHERE id=?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+// 	$session = $con->myQuery("SELECT * FROM tbl_applicant WHERE id=?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+	$session = $con->myQuery("SELECT * FROM tbl_applicant WHERE applicant_id=?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC); // CHANGED : 4/30/2019 : Marckus
+
+	//david edited 4/16/2019
+	$job_description = $con->myQuery("SELECT id,description from job_title where id=?",array($session['position_applied']))->fetch(PDO::FETCH_ASSOC);
+
+	//david end
 
 	# FINAL QUERY FOR CHECKING OF JOB TITLE - HR DEPT
 	// $job_checker = $con->myQuery("SELECT jt.description FROM users u INNER JOIN employees e ON u.employee_id = e.id INNER JOIN job_title jt ON e.job_title_id = jt.id WHERE jt.id IN (16, 26, 27) AND u.id = '".$id."'")->fetch(PDO::FETCH_ASSOC);
-	
+
 	# UNCOMMENT THIS IN THE FUTURE
 	$job_checker = $con->myQuery("SELECT jt.description FROM users u INNER JOIN employees e ON u.employee_id = e.id INNER JOIN job_title jt ON e.job_title_id = jt.id WHERE jt.id IN (16, 26, 27, 13, 1, 3) AND u.id = '".$id."'")->fetch(PDO::FETCH_ASSOC);
 
@@ -40,8 +45,9 @@
 	} else if ($session['is_viewed'] == 0) {
 		$inputs['employees_id']=$_SESSION[WEBAPP]['user']['employee_id'];
 		$loggedin_user = "SELECT id, CONCAT(e.last_name, ', ', e.first_name) AS employee FROM employees e WHERE e.id=:employees_id";
-		$data = $con->myQuery($loggedin_user,$inputs)->fetch(PDO::FETCH_ASSOC); 
-		$query = $con->myQuery("UPDATE tbl_applicant SET is_viewed = 1, working_id = '".$id."', working = '".$data['employee']."' WHERE id = ?", array($_GET['id']));
+		$data = $con->myQuery($loggedin_user,$inputs)->fetch(PDO::FETCH_ASSOC);
+// 		$query = $con->myQuery("UPDATE tbl_applicant SET is_viewed = 1, working_id = '".$id."', working = '".$data['employee']."' WHERE id = ?", array($_GET['id']));
+		$query = $con->myQuery("UPDATE tbl_applicant SET is_viewed = 1, working_id = '".$id."', working = '".$data['employee']."' WHERE applicant_id = ?", array($_GET['id'])); // CHANGED : 4/30/2019 : Marckus
 	} else {
 		redirect("recruitment.php");
 	}
@@ -49,20 +55,31 @@
 	// die();
 
 	if (!empty($_GET['id'])) {
-		$result_id = $con->myQuery("SELECT assessment_result FROM tbl_applicant WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+		$result_id = $con->myQuery("SELECT assessment_result FROM tbl_applicant WHERE applicant_id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
 		# CHANGE THE VARIABLE NAME OF THE VARIABLE BELOW
 		$sample_application_id = $con->myQuery("SELECT application_status_id FROM tbl_applicant WHERE applicant_id = ?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
-		$applicant = $con->myQuery("SELECT applicant.id, CONCAT(profile.last_name, ', ', profile.first_name, ' ', IFNULL(profile.middle_name, '')) AS applicant_name, profile.email, profile.contact_number, applicant.application_number, applicant.application_status_id, status.description, applicant.is_viewed, IFNULL(applicant.assessed_by, '') AS assessed_by_id, position.id AS position_id, position.description, applicant.desired_monthly_salary, DATE_FORMAT(applicant.date_available_for_work,'%W, %D %M %Y') AS date_available_for_work, applicant.date_of_contact, applicant.interview_date, applicant.date_applied, (SELECT CONCAT(e.last_name, ', ', e.first_name) AS assessed_by 
-			FROM employees e 
+
+// 		$applicant = $con->myQuery("SELECT applicant.id, CONCAT(profile.last_name, ', ', profile.first_name, ' ', IFNULL(profile.middle_name, '')) AS applicant_name, profile.email, profile.contact_number, applicant.application_number, applicant.application_status_id, status.description, applicant.is_viewed, IFNULL(applicant.assessed_by, '') AS assessed_by_id, position.id AS position_id, position.description, applicant.desired_monthly_salary, DATE_FORMAT(applicant.date_available_for_work,'%W, %D %M %Y') AS date_available_for_work, applicant.date_of_contact, applicant.interview_date, applicant.date_applied, (SELECT CONCAT(e.last_name, ', ', e.first_name) AS assessed_by
+// 			FROM employees e
+// 			INNER JOIN users u ON u.employee_id = e.id
+// 			INNER JOIN tbl_applicant a ON u.id = a.assessed_by WHERE a.id = ?)  AS assessed_by
+// 			FROM tbl_applicant AS applicant
+// 			INNER JOIN tbl_applicant_profile AS profile ON applicant.applicant_id = profile.id
+// 			INNER JOIN tbl_application_status AS status ON applicant.application_status_id = status.id
+// 			LEFT JOIN tbl_employee AS employee ON applicant.pending_interview_status = employee.id INNER JOIN job_title AS position ON applicant.position_applied = position.id WHERE applicant.id=?", array($applicant_id, $_GET['id']))->fetch(PDO::FETCH_ASSOC);
+
+		// CHANGED : 4/30/2019 : MARCKUS
+		$applicant = $con->myQuery("SELECT applicant.applicant_id, CONCAT(profile.last_name, ', ', profile.first_name, ' ', IFNULL(profile.middle_name, '')) AS applicant_name, profile.email, profile.contact_number, applicant.application_number, applicant.application_status_id, status.description, applicant.is_viewed, IFNULL(applicant.assessed_by, '') AS assessed_by_id, position.id AS position_id, position.description, applicant.desired_monthly_salary, DATE_FORMAT(applicant.date_available_for_work,'%W, %D %M %Y') AS date_available_for_work, applicant.date_of_contact, applicant.interview_date, applicant.date_applied, (SELECT CONCAT(e.last_name, ', ', e.first_name) AS assessed_by
+			FROM employees e
 			INNER JOIN users u ON u.employee_id = e.id
-			INNER JOIN tbl_applicant a ON u.id = a.assessed_by WHERE a.id = ?)  AS assessed_by 
-			FROM tbl_applicant AS applicant 
-			INNER JOIN tbl_applicant_profile AS profile ON applicant.applicant_id = profile.id 
-			INNER JOIN tbl_application_status AS status ON applicant.application_status_id = status.id 
-			LEFT JOIN tbl_employee AS employee ON applicant.pending_interview_status = employee.id INNER JOIN job_title AS position ON applicant.position_applied = position.id WHERE applicant.id=?", array($applicant_id, $_GET['id']))->fetch(PDO::FETCH_ASSOC);
+			INNER JOIN tbl_applicant a ON u.id = a.assessed_by WHERE a.applicant_id = ?)  AS assessed_by
+			FROM tbl_applicant AS applicant
+			INNER JOIN tbl_applicant_profile AS profile ON applicant.applicant_id = profile.id
+			INNER JOIN tbl_application_status AS status ON applicant.application_status_id = status.id
+			LEFT JOIN tbl_employee AS employee ON applicant.pending_interview_status = employee.id INNER JOIN job_title AS position ON applicant.position_applied = position.id WHERE applicant.applicant_id= ?", array($applicant_id, $_GET['id']))->fetch(PDO::FETCH_ASSOC);
 		# CHANGE THE VARIABLE NAME OF THE VARIABLE BELOW
-		$assessed_by = $con->myQuery("SELECT applicant.assessment_result, application_status.description FROM tbl_applicant applicant INNER JOIN tbl_application_status application_status ON applicant.assessment_result = application_status.id WHERE applicant.id = ?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
-		$assessed_by_count = $con->myQuery("SELECT applicant.assessment_result, application_status.description FROM tbl_applicant applicant INNER JOIN tbl_application_status application_status ON applicant.assessment_result = application_status.id WHERE applicant.id = ?", array($_GET['id']));
+		$assessed_by = $con->myQuery("SELECT applicant.assessment_result, application_status.description FROM tbl_applicant applicant INNER JOIN tbl_application_status application_status ON applicant.assessment_result = application_status.id WHERE applicant.applicant_id = ?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+		$assessed_by_count = $con->myQuery("SELECT applicant.assessment_result, application_status.description FROM tbl_applicant applicant INNER JOIN tbl_application_status application_status ON applicant.assessment_result = application_status.id WHERE applicant.applicant_id = ?", array($_GET['id']));
 		$count_assessed_by = $assessed_by_count->rowCount();
 
 		// if(trim($applicant["assessed_by_id"]) == trim($id)) {
@@ -82,7 +99,7 @@
 
 	# CHANGE THE VARIABLE NAME OF THE VARIABLE BELOW
 	// $position = $con->myQuery("SELECT id, description FROM job_title WHERE is_deleted = 0")->fetchAll(PDO::FETCH_ASSOC);
-	$position_ = $con->myQuery("SELECT id AS pos_id,code, description FROM job_title WHERE is_deleted = 0");
+	$position_ = $con->myQuery("SELECT id AS pos_id, description FROM job_title WHERE is_deleted = 0");
 	$position_count = $position_->rowCount();
 
 	$applied_position = $con->myQuery("SELECT position.process_id FROM tbl_applicant AS applicant INNER JOIN tbl_position AS position ON applicant.position_applied = position.id WHERE applicant.id=1");
@@ -95,10 +112,10 @@
 
 	$user = $con->myQuery(	"SELECT id,username,password,is_active,last_activity,user_type_id,password_question,password_answer FROM users
 		WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
-	
-	$user_types = $con->myQuery("SELECT id, description FROM user_type")->fetchAll(PDO::FETCH_ASSOC);
 
-	$applicant_details = $con->myQuery("SELECT first_name, middle_name, last_name, email, present_address, contact_number, city, state_province_region, postal_code, country, gender, age, DATE_FORMAT(date_of_birth, '%M %d, %Y') AS date_of_birth, citizenship, marital_status FROM tbl_applicant_profile WHERE id", array($applicant_id))->fetch(PDO::FETCH_ASSOC);
+	$user_types = $con->myQuery("SELECT id, description FROM user_type")->fetchAll(PDO::FETCH_ASSOC);
+    // -- MODIFIED : 4/26/2019 // MARCKUS
+	$applicant_details = $con->myQuery("SELECT first_name, middle_name, last_name, email, present_address, contact_number, city, state_province_region, postal_code, country, gender, age, DATE_FORMAT(date_of_birth, '%M %d, %Y') AS date_of_birth, citizenship, marital_status FROM tbl_applicant_profile WHERE id=?", array($applicant_id))->fetch(PDO::FETCH_ASSOC);
 
 	// FOR FETCHING EMPLOYMENT STATUS IN DROPDOWN RESULT
 	$employment_status = $con->myQuery("SELECT id, name FROM employment_status WHERE is_deleted = 0")->fetchAll(PDO::FETCH_ASSOC);
@@ -128,15 +145,21 @@
 ?>
 
 <div class="content-wrapper">
+
 	<section class="content-header">
 		<a href='recruitment.php' class='btn btn-default'><span class='glyphicon glyphicon-arrow-left'></span> Applicant list</a>
 	</section>
 
 	<section class="content">
+
 		<div class="row">
 			<div>
 				<div class="col-md-9" style="margin: 5px 0">
+				    <?php
+    					Alert();
+    				?>
 					<div class="row">
+
 						<div class="col-md-6" style="margin: 5px 0">
 							<label for="position">Position:</label>
 							<input type="text" name="position" id="position" value='<?php echo!empty($applicant)?htmlspecialchars($applicant['description']):''; ?>' style="width: 100%" class="form-control" disabled>
@@ -175,15 +198,15 @@
 							<div class="col-md-6" style="margin: 5px 0">
 								<!-- <input type="submit" name="change_application_status" <?php if($applicant["assessed_by_id"] != $id) {?> disabled="disabled" <?php } ?> value="Update Application Status" style="width: 100%; height: 50px;"> -->
 
-								<button class="btn btn-primary" name="change_application_status" type="submit" <?php if(($applicant["assessed_by_id"] != $id) || ($interviewer_null_count > 0)) {?> disabled="disabled" <?php } ?> style="width: 100%; height: 50px;">Update Application Status</button>	
+								<button class="btn btn-primary" name="change_application_status" type="submit" <?php if(($applicant["assessed_by_id"] != $id) || ($interviewer_null_count > 0)) {?> disabled="disabled" <?php } ?> style="width: 100%; height: 50px;">Update Application Status</button>
 							</div>
 						</form>
 						<div class="col-md-6"></div>
 						<div class="col-md-6">
-						    
+
 						   <label style="font-size:11px;color:red;">(Step #1 & Step #2 must have result before Application status can be updated)</label>
 						</div>
-						
+
 							<!-- <div class="col-md-6" style="margin: 5px 0">
 								<label for="applicant_status">Application Status:</label>
 								<select name="applicant_status" class="form-control" style="width: 100%" required>
@@ -198,17 +221,17 @@
 				<div class="col-md-3" style="margin: 5px 0">
 					<div class="col-md-12">
 						<!--<div class="row"  style="margin-bottom: 5px">
-							<a href="application_form_temp.php" style="width: 100%; height: 50px">(UNDER MAINTENANCE) View Application Form </a>	
+							<a href="application_form_temp.php" style="width: 100%; height: 50px">(UNDER MAINTENANCE) View Application Form </a>
 						</div>-->
-						
+
 						<div class="row">
-						<form action="application_form_view.php" method="post" autocomplete="off">
+						<form action="application_form_view.php" method="post">
 						    <input style="display:none;" value="<?php echo $applicant_id; ?> " name="applicant_id">
 							<input class="btn btn-primary" style="width:80%;" type="submit" value="View Application Form"/>
 						</form>
 						</div>
 						<div class="row">
-							<button style="display:none;width: 100%; height: 50px">Download Application Form</button>	
+							<button style="display:none;width: 100%; height: 50px">Download Application Form</button>
 						</div>
 					</div>
 				</div>
@@ -216,19 +239,19 @@
 			<br/>
 
 			<div class="col-md-12">
-				<h3>INITIAL ASSESSMENT  <Font style='color:red;'>(STEP #1)</Font></h3>	
+				<h3>INITIAL ASSESSMENT  <Font style='color:red;'>(STEP #1)</Font></h3>
 				<hr>
 				<form action="ajax/submit_initial_assessment.php?id=<?php echo $_GET['id']?>" method="POST">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="row">
 								<div class="col-md-12" style="margin: 5px 0">
-									<label>Initial Assessment Result:</label>
+									<label>Initial Assessment Result:<?php if(!empty($assessed_by)){ echo $assessed_by['description'];} ?> </label>
 									<select <?php if(!empty($assessed_by)){ echo 'disabled';} ?> class='form-control cbo' name='assessment_result' id='assessment_result' data-placeholder="Select Assessment Result" <?php echo !(empty($_GET))?"data-selected='".$result_id['assessment_result']."'":NULL ?> style='width:100%'>
 
 										<?php echo makeOptions($result_status, "Select Assessment Result") ?>
 									</select>
-									
+
 								</div>
 							</div>
 							<!-- POSITION -->
@@ -245,12 +268,12 @@
 							<div class="row">
 								<div class="col-md-12" style="margin: 5px 0">
 									<label>Remarks:</label>
-									<textarea <?php if(!empty($assessed_by)){ echo 'disabled';} ?> name="remarks" rows="5" style="width: 100%"></textarea>	
+									<textarea <?php if(!empty($assessed_by)){ echo 'disabled';} ?> name="remarks" rows="5" style="width: 100%"></textarea>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-12 text-left">
-							<button class="btn btn-primary" type="submit" <?php if($count_assessed_by>0) {?> disabled="disabled" <?php } ?>>Submit Initial Assessment</button>	
+							<button class="btn btn-primary" type="submit" <?php if($count_assessed_by>0) {?> disabled="disabled" <?php } ?>>Submit Initial Assessment</button>
 						</div>
 					</div>
 				</form>
@@ -259,27 +282,27 @@
 		</div>
 
 		<div class="row">
-		    
+
 			<div class="col-md-6 text-right" >
 				<!-- <a href="#" class="btn btn-warning"><span class="fa fa-plus"></span> Add Process Owner</a> -->
 				<!-- <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#processOwner" <?php if(empty($assessed_by)){ echo 'disabled';} ?> >Add Process Owner</button> -->
 			    <Right> <H3  style='color:red;'>(STEP #2)  </H3></Right>
-				
+
 				<!-- <button class="btn btn-warning" data-toggle="modal" data-target="#add_process_owner">Add Process Owner</button> -->
 			</div>
 			<div class="col-md-6 text-right" style="margin-bottom:10px;">
 			    <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#processOwner" <?php if(empty($assessed_by) || ($applicant["assessed_by_id"] != $id)){ echo 'disabled';} ?> >Add Interviewer</button>
-			    
-			    <Center><Font style='font-size:11px;'> Note: Click <a style='font-size:11px' href="job_title.php">here </a> to update preset interviewer(s) </Font></Center>
-			</div>  
-			
+
+			    <Center><Font style='font-size:11px;'> Note: Click <a style='font-size:11px' href="https://hrms-tribrick.sparkglobaltech02.com/job_title.php">here </a> to update preset interviewer(s) </Font></Center>
+			</div>
+
 			<div class="col-md-12">
-			    
+
 				<table id="resultTable" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th class="text-center">Process Owner</th>
+							<th class="text-center">Interviewer</th>
 							<th class="text-center">Interview Date</th>
 							<th class="text-center">Interview Status</th>
 							<th class="text-center">Remarks</th>
@@ -317,7 +340,7 @@
 									<?php
 										if ($position_count > 0) {
 											while ($row = $position_->fetch(PDO::FETCH_ASSOC)) {
-												echo '<option value="'.$row['pos_id'].'">'.$row['code'].' </option>';
+												echo '<option value="'.$row['pos_id'].'">'.$row['description'].' </option>';
 											}
 										} else {
 											echo "<option>Position not available</option>";
@@ -327,7 +350,7 @@
 							</div>
 
 							<div class="form-group">
-								<label>Employee:</label>
+								<label>Employee(Interviewer):</label>
 								<select id="emp" name="emp" class="form-control" required>
 									<option value="">Select Position First</option>
 								</select>
@@ -355,6 +378,7 @@
 	<!-- Modal content-->
 		<div class="modal-content">
 			<form method="POST" action="ajax/onboarding.php?id=<?php echo $applicant_id?>">
+			    <input type="hidden" pattern="" name="job" value="<?php echo $job_description['id']; ?>"  class="form-control" id="job">
 				<div class="modal-header">
 					<h4 class="modal-title">Employee Form</h4>
 				</div>
@@ -362,41 +386,41 @@
 					<div class="container-fluid">
 						<!-- ADDITIONAL FIELDS -->
 						<div class="row">
-							<div class="col-md-6">
+							<!-- <div class="col-md-6">
 								<div class="form-group">
 									<label>Employment Status</label>
 									<select class='form-control cbo' name='employment_status' id='employment_status' data-placeholder="Select Employment Status" style='width:100%' required>
 
-										<?php echo makeOptions($employment_status, "Select Assessment Result") ?>
+										<?php //echo makeOptions($employment_status, "Select Assessment Result") ?>
 									</select>
 
 									<label>Pay Grade</label>
 									<select class='form-control cbo' name='pay_grade' id='pay_grade' data-placeholder="Select Pay Grade" style='width:100%' required>
 
-										<?php echo makeOptions($pay_grade, "Select Pay Grade") ?>
+										<?php //echo makeOptions($pay_grade, "Select Pay Grade") ?>
 									</select>
 
 									<label>Tax Status</label>
 									<select class='form-control cbo' name='tax_status_id' id='tax_status_id' data-placeholder="Select Tax Status" style='width:100%' required>
 
-										<?php echo makeOptions($tax_status, "Select Tax Status") ?>
+										<?php //echo makeOptions($tax_status, "Select Tax Status") ?>
 									</select>
 
 									<label>Department</label>
 									<select class='form-control cbo' name='department' id='department' data-placeholder="Select Department" style='width:100%' required>
 
-										<?php echo makeOptions($department, "Select Department") ?>
+										<?php //echo makeOptions($department, "Select Department") ?>
 									</select>
 
 									<label>Payroll Group</label>
 									<select class='form-control cbo' name='payroll_group' id='payroll_group' data-placeholder="Select Payroll Group" style='width:100%' required>
 
-										<?php echo makeOptions($payroll_group, "Select Payroll Group") ?>
+										<?php //echo makeOptions($payroll_group, "Select Payroll Group") ?>
 									</select>
 								</div>
-							</div>
+							</div>-->
 
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label>Employment Status</label>
 									<select class='form-control cbo' name='employment_status' id='employment_status' data-placeholder="Select Employment Status" style='width:100%' required>
@@ -450,7 +474,7 @@
 									<input type="text" name="last_name" class="form-control" value='<?php echo !empty($applicant_details)?htmlspecialchars($applicant_details['last_name']):''; ?>' readonly>
 								</div>
 							</div>
-							
+
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>First Name:</label>
@@ -501,8 +525,8 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>SSS Number:</label>
-									<input type="text" pattern="[0-9]{2}-[0-9]{7}-[0-9]{2}" name="sss_no" class="form-control sss" id="sss_no" placeholder="SSS Number">
+									<label>SSS Number:</label><!-- pattern="[0-9]{2}-[0-9]{7}-[0-9]{1}" may 14 2019 david removed  the sss pattern -->
+									<input type="text"  name="sss_no" class="form-control sss" id="sss_no" value='<?php echo !empty($applicant_details)?htmlspecialchars($applicant_details['sss']):''; ?>'  placeholder="SSS Number">
 									<label for="w_sss">
 										<input type="checkbox" name="w_sss" id="w_sss"> Deduct sss from payroll
 									</label>
@@ -512,7 +536,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Tax Identification Number:</label>
-									<input type="text" pattern="[0-9]{2}-[0-9]{9}-[0-9]{1}" name="tin" class="form-control tin" id="tin" placeholder="Tax Identification Number">
+									<input type="text" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{3}" name="tin" class="form-control tin" id="tin" value='<?php echo !empty($applicant_details)?htmlspecialchars($applicant_details['tin']):''; ?>'  placeholder="Tax Identification Number">
 								</div>
 							</div>
 						</div>
@@ -521,7 +545,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Philhealth:</label>
-									<input type="text" pattern="" name="philhealth_no" class="form-control philhealth" id="philhealth_no" placeholder="Philhealth">
+									<input type="text" pattern="[0-9]{2}-[0-9]{9}-[0-9]{1}" name="philhealth_no" class="form-control philhealth" id="philhealth_no" value='<?php echo !empty($applicant_details)?htmlspecialchars($applicant_details['philhealth']):''; ?>'  placeholder="Philhealth">
 									<label for="w_philhealth">
 										<input type="checkbox" name="w_philhealth" id="w_philhealth"> Deduct philhealth from payroll
 									</label>
@@ -531,11 +555,24 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Pag-ibig:</label>
-									<input type="text" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" name="pagibig_no" class="form-control pagibig" id="pagibig_no" placeholder="Pagibig">
+									<input type="text" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" name="pagibig_no" class="form-control pagibig" id="pagibig_no" value='<?php echo !empty($applicant_details)?htmlspecialchars($applicant_details['pagibig']):''; ?>'  placeholder="Pagibig">
 									<label for="w_pagibig">
 										<input type="checkbox" name="w_pagibig" id="w_pagibig"> Deduct pagibig from payroll
 									</label>
 								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Job Title:</label>
+
+									<input type="text" pattern=""  class="form-control"  value="<?php echo $job_description['description']; ?>" disabled>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+
 							</div>
 						</div>
 						<!--  -->
@@ -594,12 +631,14 @@
 								</div>
 							</div>
 
+
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>Work Contact No:</label>
 									<input type="text" name="work_contact_no" class="form-control">
 								</div>
 							</div>
+
 						</div>
 						<!--  -->
 						<div class="row">
@@ -655,7 +694,7 @@
 	function hired() {
 		var option_value = document.getElementById("applicant_status").value;
 		if (option_value == "8") {
-			$(document).ready(function(){	
+			$(document).ready(function(){
 				// alert("Hai !");
 				$("#myModal").modal('show');
 			});
@@ -666,7 +705,7 @@
 		window.location.reload();
 	});
 
-	// $(document).ready(function(){	
+	// $(document).ready(function(){
 	// 	$("#contactForm").submit(function(event){
 	// 		submitForm();
 	// 		return false;
@@ -689,7 +728,7 @@
 	// 	});
 	// }
 
-	// $(document).ready(function(){	
+	// $(document).ready(function(){
 	// 	$("#add_process").submit(function(event){
 	// 		contactForm();
 	// 		return false;
@@ -720,7 +759,7 @@
 	// 	$.ajax({
 	// 		type: 'POST',
 	// 		url: '',
-	// 		data: 
+	// 		data:
 	// 	});
 	// 	// if (position == 'selectposition') {
 	// 	// 	alert('Please select position');
@@ -751,13 +790,13 @@
 		// });
 	// }
 	// window.setInterval(function() {
-	//     $.ajax({   
+	//     $.ajax({
 	//     	type: "PATCH",
 	// 		url: "ajax/recruitment_session_timeout.php",
 	// 		success: function(data) {
 	// 			location.href = "recruitment.php";
 	// 		}
-	//     }); 
+	//     });
 	// }, 10000); // 1000 = 1 second
 
 	// setTimeout("location.href = 'recruitment.php';", 300000);
@@ -773,7 +812,7 @@
 					success:function(html){
 						$('#emp').html(html);
 					}
-				}); 
+				});
 			}else{
 				$('#emp').html('<option value="">Select employee first</option>');
 			}
@@ -782,7 +821,7 @@
 </script>
 
 <script type="text/javascript">
-	$(function () 
+	$(function ()
 	{
 		$('#resultTable').DataTable({
 			"scrollX": true,
@@ -803,7 +842,7 @@
 				  }
 		});
 		// below is commented because the modal is not showing
-		// getUsers(); 
+		// getUsers();
 	});
 </script>
 

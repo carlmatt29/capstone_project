@@ -27,11 +27,11 @@
       if ((charCode > 31 && (charCode < 48 || charCode > 57) && !(charCode == 8)) && charCode !== 45)
         return false;
       else {
-        
+
       }
       return true;
-    } 
-    
+    }
+
 
 </script>
  <div class="content-wrapper">
@@ -49,7 +49,34 @@
                     <div class="box-body">
 <form class='form-horizontal' action='save_my_info.php' method="POST" enctype="multipart/form-data">
 	<input type='hidden' name='id' value='<?php echo !empty($employee)?$employee['id']:''; ?>'>
-  <br><br><br><br>
+<div class="form-group">
+      <div class="col-sm-12 text-center col-md-2 col-md-offset-5">
+        <?php
+            if(!empty($employee))
+            {
+              if(!empty($employee['image']))
+                {
+                $image="employee_images/".$employee['image'];
+              }else
+                {
+                  if($employee['gender']=='Male')
+                    {
+                    $image="dist/img/user_male.png";
+                  }else
+                    {
+                    $image="dist/img/user_female.png";
+                  }
+              }
+            }else
+            {
+              $image="dist/img/user_placeholder.png";
+            }
+        ?>
+
+        <img src="<?php echo $image;?>" class="user-image" alt="User Image" style='width:140px;'>
+        <input type="file" id="image"  name='image' accept='image/*' class="filestyle" data-classButton="btn btn-primary" data-input="false" data-classIcon="icon-plus" data-buttonText=" &nbsp;Change Image">
+      </div>
+    </div>
 	<div class="form-group">
       <label for="code" class="col-md-3 control-label">Applicant Code *</label>
       <div class="col-md-7">
@@ -101,7 +128,7 @@
       <div class="col-md-7">
       	<select name='civil_status' class='form-control'  required>
       		<option value='' disabled="disabled" <?php echo empty($employee)?'selected="selected"':''; ?>>Select Civil Status</option>
-      		<?php 
+      		<?php
       			foreach (array('Single','Married','Divorced','Widowed') as $value):
       		?>
           		<option value='<?php echo $value?>' <?php echo !empty($employee) && $employee['civil_status']==$value?'selected="selected"':''; ?>><?php echo $value?></option>
@@ -118,7 +145,7 @@
         <input type="text"  class='form-control sss' id="sss_no" placeholder="SSS Number" name='sss_no' value='<?php echo !empty($employee)?htmlspecialchars($employee['sss_no']):''; ?>'>
           <label for="w_sss" class="col-md-12 ">
             <input type="hidden" class="" id="w_sss" name='w_sss' <?php echo !empty($employee) && !empty($employee['w_sss'])?'checked="true"':''; ?> title='Deduct sss from payroll.' value='1'>
-            
+
           </label>
       </div>
     </div>
@@ -134,7 +161,7 @@
         <input type="text" pattern="[0-9]{2}-[0-9]{9}-[0-9]{1}" class='form-control philhealth' id="philhealth" placeholder="Philhealth" name='philhealth' value='<?php echo !empty($employee)?htmlspecialchars($employee['philhealth']):''; ?>'>
           <label for="w_philhealth" class="col-md-12">
             <input type="hidden" class="" id="w_philhealth"  name='w_philhealth' <?php echo !empty($employee) && !empty($employee['w_philhealth'])?'checked="true"':''; ?> title='Deduct philhealth from payroll.' value='1'>
-            
+
           </label>
       </div>
     </div>
@@ -144,12 +171,12 @@
         <input type="text" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}" class='form-control pagibig' id="pagibig" placeholder="Pagibig" name='pagibig' value='<?php echo !empty($employee)?htmlspecialchars($employee['pagibig']):''; ?>'>
           <label for="w_hdmf" class="col-md-12">
             <input type="hidden" class="" id="w_hdmf"  name='w_hdmf' <?php echo !empty($employee) && !empty($employee['w_hdmf'])?'checked="true"':''; ?> title='Deduct pagibig from payroll.' value='1'>
-            
+
           </label>
       </div>
     </div>
 
-    
+
     <div class="form-group">
       <label for="address1" class="col-md-3 control-label">Address 1 *</label>
       <div class="col-md-7">

@@ -22,14 +22,14 @@
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/ionicons.min.css">    
+    <link rel="stylesheet" href="css/ionicons.min.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 
 
 
-  
+
     <div class="bg-top navbar-light">
       <div class="container">
         <div class="row no-gutters d-flex align-items-center align-items-stretch">
@@ -43,7 +43,7 @@
                 <div class="text">
                   <span>Email</span>
                   <span>recruitment@jmsstaffingsolutions.com</span>
-                  
+
                 </div>
               </div>
               <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
@@ -54,7 +54,7 @@
               </div>
               <div class="col-md topper d-flex align-items-center justify-content-end">
                 <p class="mb-0 d-block">
-                  <a class="btn btn-info btn-lg" href="applicant_registration.php" data-toggle="registration.php" data-target="#sign-up"><span>Register to Us</span></a>
+                  <a class="btn btn-info btn-lg" href="register.php" data-toggle="registration.php" data-target="#sign-up"><span>Register to Us</span></a>
                 </p>
               </div>
             </div>
@@ -78,24 +78,24 @@
             <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
             <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
             <li class="nav-item active"><a href="frmlogin.php" class="nav-link">Sign in</a></li>
-            
-           
+
+
           </ul>
         </div>
-      </div>  
+      </div>
     </nav>
     <!-- END nav -->
-  
+
     <div class="login-box" >
       <div class="login-box-body" style="border-radius: 10px;border: 1px solid;">
-        
+
         <div class="login-logo">
         <img src="dist/img/capstone/JMSSolution.png" class='img-responsive center-block' >
         </div><!-- /.login-logo -->
         <?php
           Alert();
         ?>
-            <h3><p class="login-box-msg ">Login to your Account</p></h3> 
+            <h3><p class="login-box-msg ">Login to your Account</p></h3>
           <!--  <h4 class="form-signin-heading">Login to your Account</h4>-->
         <form action="logingin.php" method="post">
           <input type='hidden' value='<?php echo $ipaddress ?>' id='ipadd' name='ipadd'>

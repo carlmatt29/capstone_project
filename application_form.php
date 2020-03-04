@@ -17,10 +17,10 @@
 				     <div class="row">
 						<div class="form-group; col-lg-6" style="margin: 8px 0"> <!-- MOVED : 4/26/2019-->
 							<h1>Position Applied For <span style="color: red">*</span></h1>
-							<select id="position_applied" class="required form-control cbo" name="position_applied" required>
-								<option>Select Job you applied for</option>
+							<select id="position_applied" class="required form-control cbo" name="position_applied">
+								<!-- <option>Select Job you applied for</option> -->
 								<?php
-									$sql = $con->myQuery("SELECT id, CONCAT(code,' (',company_name,')' ) as code,description FROM job_title WHERE is_deleted=0 and is_available=1");
+									$sql = $con->myQuery("SELECT id, CONCAT(code,' (',company_name,')' ) as code,description FROM job_title WHERE is_deleted=0 and is_available=1 AND id='$_GET[id];'");
 
 									while($row=$sql->fetch(PDO::FETCH_ASSOC)){
 										echo "<option data-description ='".htmlspecialchars($row['description'])."'  value='" . $row['id'] . "'>" . $row['code'] . "</option>";

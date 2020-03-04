@@ -14,7 +14,7 @@
     // if($uid<>1){
     //   redirect("index.php");
     // }
-    
+
 
 
     $employee_list = $con->myQuery("SELECT code,CONCAT(last_name,', ',first_name,' ',IFNULL(middle_name,'')) as 'full_name' FROM employees WHERE is_deleted = 0 AND id != 1 AND id != 90 ORDER BY last_name");
@@ -42,7 +42,7 @@
                 <?php Alert(); ?>
                 <div class="box box-warning">
                     <div class="box-body">
-              
+
 
 
                                 <div class='col-ms-6 text-right'>
@@ -74,8 +74,7 @@
                                                 <td class='text-center's>
                                                     <a href='personal_information.php?id=<?php echo $row['id']?>' class='btn btn-success btn-sm'><span class='fa fa-pencil'></span></a>
                                                     <a href='delete.php?t=e&id=<?php echo $row['id']?>' title='Delete Employee' onclick="return confirm('This record will be deleted.')" class='btn btn-danger btn-sm'><span class='fa fa-trash'></span></a>
-                                                    <a href='employee_details_report.php?employees_id=<?php echo $row['id']?>' class='btn btn-info btn-sm'><span class='fa fa-download'></span></a>
-                                                </td>
+                                                     </td>
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>
@@ -92,15 +91,15 @@
 </div>
 
 <script type="text/javascript">
-    function getUsers() 
+    function getUsers()
     {
         $(".cbo-employees-id").val("");
-        $(".cbo-employees-id").trigger("change");   
+        $(".cbo-employees-id").trigger("change");
         $(".cbo-employees-id").select2(
         {
             placeholder:"Select Employee",
             multiple:true,
-            ajax: 
+            ajax:
             {
                 url: "./ajax/cbo_dep_employees.php?dep_id="+$("#department_id").val(),
                 dataType: "json",
@@ -126,8 +125,8 @@
             allowClear:$(this).data("allow-clear")
         });
     }
-  
-    $(function () 
+
+    $(function ()
     {
         $('#ResultTable').DataTable(
         {
@@ -141,7 +140,7 @@
         });
         getUsers();
     });
-    function myFunction() 
+    function myFunction()
     {
         document.getElementById("pgl").selected = "true";
         document.getElementById("dl").selected = "true";

@@ -66,7 +66,7 @@
 
         $errors="";
 
-        foreach ($required_fieds as $key => $value) 
+        foreach ($required_fieds as $key => $value)
         {
             if (empty($inputs[$key])) {
                 $errors.=$value;
@@ -93,7 +93,7 @@
         }
 
 
-        if ($errors!="") 
+        if ($errors!="")
         {
             Alert("You have the following errors: <br/>".$errors, "danger");
             if (empty($inputs['id'])) {
@@ -104,8 +104,8 @@
                 die();
             }
             die;
-        
-        } else 
+
+        } else
         {
             if(empty($inputs['w_sss'])){
             	$inputs['w_sss']=0;
@@ -124,7 +124,7 @@
                 unset($inputs['id']);
 
                 $inputs['birthday'] = date_format(date_create($inputs['birthday']),"Y-m-d");
-                
+
                 $con->myQuery("INSERT INTO employees(
 					code,
 					first_name,
@@ -186,7 +186,7 @@
             } else {
                 //Update
                 $inputs['birthday'] = date_format(date_create($inputs['birthday']),"Y-m-d");
-                
+
                 $con->myQuery("UPDATE employees SET
 							code=:code,
 							first_name=:first_name,

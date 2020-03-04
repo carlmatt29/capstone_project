@@ -24,21 +24,18 @@
 		INNER JOIN employees e ON i.process_owner_id = e.id
 		LEFT JOIN tbl_application_status stat ON i.interview_status = stat.id
 		WHERE i.id = ?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
-	
+
 	makeHead("Edit Process Owner");
 
 	$checker = $con->myQuery("SELECT a.assessed_by FROM tbl_applicant a INNER JOIN tbl_interview i ON i.applicant_id = a.id WHERE i.id = ?", array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
 
 	// var_dump($checker['assessed_by']);
 
-	if ($checker['assessed_by'] != $id) {
-		// redirect('view_applicant.php?id='.urlencode($interview['applicant_id']));
-		header("Refresh:0; url=view_applicant.php?id=".urlencode($interview['applicant_id']));
-	}
+
 	// die();
 
 
-	if ($process['interview_status'] == "7") {		
+	if ($process['interview_status'] == "7") {
 		redirect('view_applicant.php?id='.urlencode($interview['applicant_id']));
 		// redirect('view_applicant.php?id='.urlencode($interview['applicant_id']).'&status='.'cancelled');
 	}
@@ -66,7 +63,7 @@
 										<div class="col-md-8">
 											<input type="text" name="process_owner" value='<?php echo !empty($interview)?htmlspecialchars($interview['process_owner']):''; ?>' disabled>
 										</div>
-									</div>	
+									</div>
 								</div>
 
 								<div class="col-md-12">
@@ -88,7 +85,7 @@
 											</select>
 										</div>
 									</div>
-									
+
 								</div>
 
 								<div class="col-md-12">

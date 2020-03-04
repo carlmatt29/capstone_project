@@ -27,11 +27,11 @@
       if ((charCode > 31 && (charCode < 48 || charCode > 57) && !(charCode == 8)) && charCode !== 45)
         return false;
       else {
-        
+
       }
       return true;
-    } 
-    
+    }
+
 
 </script>
  <div class="content-wrapper">
@@ -101,7 +101,7 @@
       <div class="col-md-7">
       	<select name='civil_status' class='form-control'  required>
       		<option value='' disabled="disabled" <?php echo empty($employee)?'selected="selected"':''; ?>>Select Civil Status</option>
-      		<?php 
+      		<?php
       			foreach (array('Single','Married','Divorced','Widowed') as $value):
       		?>
           		<option value='<?php echo $value?>' <?php echo !empty($employee) && $employee['civil_status']==$value?'selected="selected"':''; ?>><?php echo $value?></option>
@@ -149,7 +149,7 @@
       </div>
     </div>
 
-    
+
     <div class="form-group">
       <label for="address1" class="col-md-3 control-label">Address 1 *</label>
       <div class="col-md-7">

@@ -29,9 +29,6 @@ function error_logs($module,$error){
 }
 
 
-# TRIXIA
-
-# TRIXIA
 
 function redirect($url)
 {
@@ -41,10 +38,8 @@ function redirect($url)
 // ENCRYPTOR
 function encryptIt($q)
 {
-    //edited by david
     $cryptKey  = 'JPB0rGtIn5UB1xG03efyCp';
-    $qEncoded      =
-    base64_encode(openssl_encrypt($q, 'AES-256-CBC',$cryptKey, OPENSSL_RAW_DATA));
+    $qEncoded      = base64_encode(openssl_encrypt($q, 'AES-256-CBC',$cryptKey, OPENSSL_RAW_DATA));
 
     //(old deprecated dont use the code below:)
     /*$cryptKey  = 'JPB0rGtIn5UB1xG03efyCp';
