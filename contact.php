@@ -20,20 +20,14 @@ makeHead("Login");
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
-
     <link rel="stylesheet" href="css/aos.css">
-
     <link rel="stylesheet" href="css/ionicons.min.css">
-
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
@@ -50,7 +44,7 @@ makeHead("Login");
       <div class="container">
         <div class="row no-gutters d-flex align-items-center align-items-stretch">
           <div class="col-md-4 d-flex align-items-center py-4">
-            <a class="navbar-brand" href="index.php">JMSSS Inc.</a>
+            <a class="navbar-brand" href="index.php">JMS Staffing Solution Inc.</a>
           </div>
           <div class="col-lg-8 d-block">
             <div class="row d-flex">
@@ -154,59 +148,6 @@ makeHead("Login");
     </section>
 
 
-
-    <section class="ftco-section contact-section">
-      <div class="container">
-        <div class="row d-flex mb-5 contact-info justify-content-center">
-        	<div class="col-md-8">
-        		<div class="row mb-5">
-		          <div class="col-md-4 text-center py-4">
-		          	<div class="icon">
-		          		<span class="icon-map-o"></span>
-		          	</div>
-		            <p><span>Address:</span> 1JMS Staffing Solutions, Inc.
-                    2nd Floor St. Anthony Bldg. 891 Aurora Blvd. Cubao, Quezon City Metro Manila, 1109 Philippines</p>
-		          </div>
-		          <div class="col-md-4 text-center border-height py-4">
-		          	<div class="icon">
-		          		<span class="icon-mobile-phone"></span>
-		          	</div>
-		            <p><span>Phone:</span> <a href="#">(02)‎ 281-6535</a></p>
-		          </div>
-		          <div class="col-md-4 text-center py-4">
-		          	<div class="icon">
-		          		<span class="icon-envelope-o"></span>
-		          	</div>
-		            <p><span>Email:</span> <a href="#">recruitment@jmsstaffingsolutions.com</a></p>
-		          </div>
-		        </div>
-          </div>
-        </div>
-        <div class="row block-9 justify-content-center mb-5">
-          <div class="col-md-8 mb-md-5">
-          	<h2 class="text-center">If you got any questions <br>please do not hesitate to send us a message</h2>
-            <form action="#" class="bg-light p-5 contact-form">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
-              </div>
-              <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-              </div>
-            </form>
-
-          </div>
-        </div>
-      </div>
-    </section>
 
    <!--  <section class="ftco-section ftco-no-pb ftco-no-pt">
     	<div class="container-fluid px-0">

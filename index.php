@@ -17,7 +17,7 @@ if (isset($_SESSION['registration']) && $_SESSION['registration']) {
 
 
 
-makeHead("Login");
+makeHead("Home");
 
 ?>
 
@@ -46,7 +46,7 @@ makeHead("Login");
   <div class="container">
     <div class="row no-gutters d-flex align-items-center align-items-stretch">
       <div class="col-md-4 d-flex align-items-center py-4">
-        <a class="navbar-brand" href="index.php">JMSSS Inc.</a>
+        <a class="navbar-brand" href="index.php">JMS Staffing Solution Inc.</a>
       </div>
       <div class="col-lg-8 d-block">
         <div class="row d-flex">
@@ -83,7 +83,7 @@ makeHead("Login");
         <li class="nav-item active"><a href="index.php" class="nav-link pl-0">Home</a></li>
         <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
         <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
-        <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+      
         <li class="nav-item"><a href="register.php" class="nav-link">Sign up</a></li>
         <li class="nav-item"><a href="#" class="nav-link" data-toggle="modal" data-target="#sign-in">Sign in</a></li>
 

@@ -44,7 +44,7 @@
                   WHERE e.id=?";
 
     $data=$con->myQuery($employee,$inputs)->fetch(PDO::FETCH_ASSOC)  ;
-
+    
 #EMPLOYEE_EDUCATION
       $employee_education=$con->myQuery("SELECT
                                           ee.id,

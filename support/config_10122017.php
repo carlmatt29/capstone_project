@@ -1853,9 +1853,6 @@ function getFiledOvertime($date, $time_from, $time_to, $employee_id)
                     AND ((:time_from BETWEEN time_from AND time_to) OR (:time_to BETWEEN time_from AND time_to))
                     AND request_status_id IN (1, 2, 3)", array("ot_date"=>$date, "time_from"=>$time_from, "time_to"=>$time_to, "employee_id"=> $employee_id))->fetchColumn();
 }
-//-------------------------------------------------------------------------------------------------------------------------------------------//
-//-------------------------------------------------------------------------------------------------------------------------------------------//
-
 
 
 

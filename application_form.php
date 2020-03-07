@@ -431,8 +431,8 @@
                     						<th>Education Level</th>
                     						<th>School Name</th>
                     						<th>Address</th>
-                    						<th>School Year From</th>
-                    						<th>School Year To</th>
+                    						<th>From</th>
+                    						<th>To</th>
                     						<th>Action</th>
                     					</tr>
                 					</thead>

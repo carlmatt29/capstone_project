@@ -66,9 +66,10 @@
     <!-- Bootstrap 3.3.5 -->
     <script src="<?php echo str_repeat('../',$level) ?>bootstrap/js/bootstrap.min.js"></script>
 <?php
-if($pageTitle=="Login"):
+if($pageTitle=="Login" || $pageTitle=="Registration" || $pageTitle=="Home" || $pageTitle=="About" || $pageTitle=="Services"):
 ?>
 <body class="hold-transition login-page">
+
 <?php
 else:
 ?>
